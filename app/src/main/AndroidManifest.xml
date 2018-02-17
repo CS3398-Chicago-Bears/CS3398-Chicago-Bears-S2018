@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Home"></activity>
+        <activity android:name=".View.HomeActivity"></activity>
+        <activity android:name=".View.BracketActivity"></activity>
     </application>
 
 </manifest>
