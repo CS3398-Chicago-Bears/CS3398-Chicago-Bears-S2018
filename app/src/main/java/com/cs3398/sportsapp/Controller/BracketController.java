@@ -5,11 +5,10 @@ import java.util.Scanner;
 import com.cs3398.sportsapp.Model.*;
 
 public class BracketController {
-    private User User;
     private String inputName;
 
     Scanner sc = new Scanner(System.in);
-    ArrayList<User> UserList = new ArrayList<User>();
+    ArrayList<String> PlayerList = new ArrayList<>();
 
     public void addUser() {
         User User1 = new User();
@@ -17,7 +16,7 @@ public class BracketController {
         inputName = sc.nextLine();
         User1.setFirstName(inputName);
 
-        UserList.add(User1);
+        PlayerList.add(inputName);
     }
 
 
