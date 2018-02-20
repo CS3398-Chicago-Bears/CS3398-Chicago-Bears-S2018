@@ -9,6 +9,7 @@ import com.cs3398.sportsapp.R;
 
 public class BracketActivity extends AppCompatActivity {
     //private Button newBracket;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +20,7 @@ public class BracketActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(authenticator.validate(name.getText().toString(),password.getText().toString())){
-                    Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+                    Intent intent = new Intent(BracketActivity.this,NewBracketActivity.class);
                     startActivity(intent);
                 }
             }
