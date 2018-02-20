@@ -19,19 +19,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final AuthenticateLogIn authenticator = new AuthenticateLogIn();
 
-        name = findViewById(R.id.etUserName);
-        password = findViewById(R.id.etPassword);
-        login = findViewById(R.id.login);
+        name = (EditText)findViewById(R.id.etUserName);
+        password = (EditText)findViewById(R.id.etPassword);
+        login = (Button)findViewById(R.id.login);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(authenticator.validate(name.getText().toString(),password.getText().toString())){
-                    Intent intent = new Intent(MainActivity.this,Home.class);
+                    Intent intent = new Intent(MainActivity.this,HomeActivity.class);
                     startActivity(intent);
                 }
             }
         });
-        System.out.println("This is a test for github");
     }
 }
