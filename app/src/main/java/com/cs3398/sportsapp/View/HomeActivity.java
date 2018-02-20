@@ -16,8 +16,17 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //search = (Button)findViewById(R.id.search);
-        bracket = (Button)findViewById(R.id.button2);
+        search = (Button)findViewById(R.id.search);
+        bracket = (Button)findViewById(R.id.bracket);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         bracket.setOnClickListener(new View.OnClickListener() {
             @Override

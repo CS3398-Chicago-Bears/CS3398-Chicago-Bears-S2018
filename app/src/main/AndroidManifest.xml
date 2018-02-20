@@ -19,6 +19,7 @@
         <activity android:name=".View.HomeActivity"></activity>
         <activity android:name=".View.BracketActivity"></activity>
         <activity android:name=".View.NewBracketActivity"></activity>
+        <activity android:name=".View.SearchActivity"></activity>
 
     </application>
 </manifest>
