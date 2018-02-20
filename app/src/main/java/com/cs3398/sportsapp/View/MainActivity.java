@@ -12,6 +12,7 @@ import com.cs3398.sportsapp.R;
 public class MainActivity extends AppCompatActivity {
     private EditText name, password;
     private Button login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
