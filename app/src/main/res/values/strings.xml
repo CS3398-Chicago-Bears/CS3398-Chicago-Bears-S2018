@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SportsApp</string>
+    <string name="search">Search</string>
+    <string name="bracket">Bracket</string>
+    <string name="current">Current</string>
+    <string name="newBracket">New</string>
+    <string name="completed">Completed</string>
+    <string name="back">Back</string>
 </resources>

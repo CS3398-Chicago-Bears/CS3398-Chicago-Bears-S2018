@@ -19,5 +19,4 @@
         <activity android:name=".View.HomeActivity"></activity>
         <activity android:name=".View.BracketActivity"></activity>
     </application>
-
 </manifest>
