@@ -1,4 +1,4 @@
-package com.example.guy.chicagobears;
+package com.cs3398.sportsapp.Model;
 
 import java.util.Calendar;
 import java.util.Date;
