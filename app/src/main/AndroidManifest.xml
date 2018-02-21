@@ -16,10 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.HomeActivity"></activity>
-        <activity android:name=".View.BracketActivity"></activity>
-        <activity android:name=".View.NewBracketActivity"></activity>
-        <activity android:name=".View.SearchActivity"></activity>
-
+        <activity android:name=".View.HomeActivity" />
+        <activity android:name=".View.BracketActivity" />
+        <activity android:name=".View.NewBracketActivity" />
+        <activity android:name=".View.SearchActivity" />
+        <activity android:name=".View.CreateAccountActivity"></activity>
     </application>
+
 </manifest>

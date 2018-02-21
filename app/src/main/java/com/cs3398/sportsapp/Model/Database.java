@@ -1,3 +1,5 @@
+package com.cs3398.sportsapp.Model;
+
 import java.util.ArrayList;
 
 // test global database. Idea is to use database class as the array list, rather than having separate

@@ -11,7 +11,7 @@ import com.cs3398.sportsapp.R;
 
 public class MainActivity extends AppCompatActivity {
     private EditText name, password;
-    private Button login;
+    private Button login, createNewAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         name = (EditText)findViewById(R.id.etUserName);
         password = (EditText)findViewById(R.id.etPassword);
         login = (Button)findViewById(R.id.login);
+        createNewAccount = (Button)findViewById(R.id.newAccount);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this,HomeActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+
+        createNewAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View view) {
+                Intent intent = new Intent(MainActivity.this,CreateAccountActivity.class);
+                startActivity(intent);
             }
         });
     }

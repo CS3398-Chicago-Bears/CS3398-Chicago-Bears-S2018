@@ -1,3 +1,5 @@
+package com.cs3398.sportsapp.Model;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
