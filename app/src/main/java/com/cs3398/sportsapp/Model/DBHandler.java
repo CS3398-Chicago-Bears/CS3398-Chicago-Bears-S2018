@@ -37,7 +37,7 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Adding new shop
+    // Adding new user
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -47,6 +47,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_USERS, null, values);
         db.close(); // Closing database connection
     }
+
     // Getting one user
     public User getUser(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -57,49 +58,53 @@ public class DBHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
         User contact = new User(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2));
-// return shop
+    // return user
         return contact;
     }
-    // Getting All Shops
+
+    // Getting All Users
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<User>();
-// Select All Query
+    // Select All Query
         String selectQuery = "SELECT * FROM" + TABLE_USERS;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-// looping through all rows and adding to list
+    // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 User user = new User();
                 user.setId(Integer.parseInt(cursor.getString(0)));
                 user.setName(cursor.getString(1));
                 user.setAddress(cursor.getString(2));
-// Adding contact to list
+    // Adding contact to list
                 userList.add(user);
             } while (cursor.moveToNext());
         }
-// return contact list
+    // return contact list
         return userList;
     }
-    // Getting shops Count
+
+    // Getting users Count
     public int getUsersCount() {
         String countQuery = "SELECT * FROM" + TABLE_USERS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
-// return count
+    // return count
         return cursor.getCount();
     }
-    // Updating a shop
+
+    // Updating a user
     public int updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, user.getName());
         values.put(KEY_ADDRESS, user.getAddress());
-// updating row
+    // updating row
         return db.update(TABLE_USERS, values, KEY_ID + "= ?",
         new String[]{String.valueOf(user.getId())});
     }
+
     // Deleting a user
     public void deleteUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
