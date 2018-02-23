@@ -19,6 +19,11 @@ public class User {
     //Change from String to 'Bracket' type
     private ArrayList<String> brackets;
 
+    public User(int uID) {
+        // Need to grab lastest from database
+        this.uID = uID;
+    }
+
     public int getuID() {
         return uID;
     }
