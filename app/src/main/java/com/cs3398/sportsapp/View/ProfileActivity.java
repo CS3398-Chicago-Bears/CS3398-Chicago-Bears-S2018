@@ -31,23 +31,23 @@ public class ProfileActivity extends AppCompatActivity {
         test.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 User u1 = new User();
-                u1.setFirstName("Taylor");
-                u1.setLastName("Mauldin");
+                //u1.setFirstName("Taylor");
+                //u1.setLastName("Mauldin");
                 u1.addSportsPreference("Basketball");
                 u1.addSportsPreference("Soccer");
                 u1.setWins(3);
                 u1.setLosses(3);
 
-                String newName = u1.getFirstName()+" "+u1.getLastName();
-                name.setText(newName);
+                //String newName = u1.getFirstName()+" "+u1.getLastName();
+                //name.setText(newName);
 
                 StringBuilder addSports = new StringBuilder();
-                for(int i = 0; i < u1.getSportsPreference().size(); i++) {
+                /*for(int i = 0; i < u1.getSportsPreference().size(); i++) {
                     if (i != 0) {
                         addSports.append(", ");
                     }
                     addSports.append(u1.getSportsPreference().get(i));
-                }
+                }*/
 
                 // NOT DONE
             }
