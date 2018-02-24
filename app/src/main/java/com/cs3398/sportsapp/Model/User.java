@@ -1,12 +1,13 @@
 package com.cs3398.sportsapp.Model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class User {
     private int uID;
     private String firstName;
     private String lastName;
-    private ArrayList<String> sportsPreference;
+    private ArrayList<String> sportsPreference = new ArrayList<String>();
     private int skillLevel;
     private int wins;
     private int losses;
@@ -17,6 +18,11 @@ public class User {
 
     //Change from String to 'Bracket' type
     private ArrayList<String> brackets;
+
+    public User(int uID) {
+        // Need to grab lastest from database
+        this.uID = uID;
+    }
 
     public int getuID() {
         return uID;
@@ -30,12 +36,8 @@ public class User {
         return lastName;
     }
 
-    public String getSportsPreference() {
-        for (String s : sportsPreference) {
-            // Will change as needed. Only returns first string for now.
-            return s;
-        }
-        return "placeholder";
+    public ArrayList<String> getSportsPreference() {
+        return sportsPreference;
     }
 
     public int getSkillLevel() {
