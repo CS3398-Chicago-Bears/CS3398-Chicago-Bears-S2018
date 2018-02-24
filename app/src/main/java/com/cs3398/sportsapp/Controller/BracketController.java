@@ -14,7 +14,7 @@ public class BracketController {
         User User1 = new User();
         System.out.println("Enter a name");
         inputName = sc.nextLine();
-        User1.setFirstName(inputName);
+        User1.setUserName(inputName);
 
         PlayerList.add(inputName);
     }

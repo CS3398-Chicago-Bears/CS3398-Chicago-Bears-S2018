@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class User {
     private int uID;
-    private String firstName;
-    private String lastName;
+    private String userName;
+    private String password;
     private ArrayList<String> sportsPreference;
     private int skillLevel;
     private int wins;
@@ -22,13 +22,8 @@ public class User {
         return uID;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
+    public String getUserName(){return userName;}
+    public String getPassword(){return password;}
 
     public String getSportsPreference() {
         for (String s : sportsPreference) {
@@ -66,14 +61,6 @@ public class User {
         this.uID = uID;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public void addSportsPreference(String sportsPreference) {
         this.sportsPreference.add(sportsPreference);
     }
@@ -101,4 +88,8 @@ public class User {
     public void setLosses(int losses) {
         this.losses = losses;
     }
+
+    public void setUserName(String Name){this.userName = Name;}
+
+    public void setPassword(String Password){this.password = Password;}
 }

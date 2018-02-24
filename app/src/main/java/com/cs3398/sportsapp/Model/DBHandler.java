@@ -17,22 +17,25 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TABLE_USERS = "users";
     // Users Table Columns names
     private static final String KEY_ID = "id";
-    private static final String KEY_NAME = "name";
-    private static final String KEY_ADDRESS = "address";
+    private static final String COLUMN_USER_NAME = "name";
+    private static final String COLUMN_USER_PASSWORD= "user_password";
+    private static final String COLUMN_USER_SKILL= "user_skill";
+
+    private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USERS + "("
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
+            + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_SKILL + " INTEGER" + ")";
+
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE" + TABLE_USERS + "("
-        + KEY_ID + "INTEGER PRIMARY KEY," + KEY_NAME + "TEXT,"
-        + KEY_ADDRESS + "TEXT" + ")";
-        db.execSQL(CREATE_CONTACTS_TABLE);
+        db.execSQL(CREATE_USER_TABLE);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS" + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
     // Creating tables again
         onCreate(db);
     }
@@ -41,16 +44,65 @@ public class DBHandler extends SQLiteOpenHelper {
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, user.getLastName()); // user Name
-        values.put(KEY_ADDRESS, user.getSportsPreference()); // user preference
+        values.put(COLUMN_USER_NAME, user.getUserName()); // user Name
+        values.put(COLUMN_USER_PASSWORD, user.getPassword()); // user preference
+        //values.put(COLUMN_USER_SKILL, user.getSkillLevel());
     // Inserting Row
         db.insert(TABLE_USERS, null, values);
         db.close(); // Closing database connection
     }
+    public boolean checkUser(String userName){
+        String [] columns ={
+                KEY_ID
+        };
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selection = COLUMN_USER_NAME + " =?";
+        String[] selectionArgs = {userName};
 
+        Cursor cursor = db.query(TABLE_USERS,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if(cursorCount > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkUser(String userName, String password){
+        String [] columns ={
+                KEY_ID
+        };
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selection = COLUMN_USER_NAME + " =?" + " AND " + COLUMN_USER_PASSWORD + " =?";
+        String[] selectionArgs = {userName, password};
+
+        Cursor cursor = db.query(TABLE_USERS,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if(cursorCount > 0){
+            return true;
+        }
+        return false;
+    }
     // Getting one user
     public User getUser(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        /*SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_USERS, new String[]{KEY_ID,
                 KEY_NAME, KEY_ADDRESS}, KEY_ID + "=?",
         new String[]{String.valueOf(id)}, null, null, null, null);
@@ -58,8 +110,8 @@ public class DBHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
         User contact = new User(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2));
-    // return user
-        return contact;
+    // return user*/
+        return null;
     }
 
     // Getting All Users
@@ -73,9 +125,9 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 User user = new User();
-                user.setId(Integer.parseInt(cursor.getString(0)));
-                user.setName(cursor.getString(1));
-                user.setAddress(cursor.getString(2));
+                user.setuID(Integer.parseInt(cursor.getString(0)));
+                user.setUserName(cursor.getString(1));
+                user.setSkillLevel(cursor.getInt(2));
     // Adding contact to list
                 userList.add(user);
             } while (cursor.moveToNext());
@@ -98,18 +150,18 @@ public class DBHandler extends SQLiteOpenHelper {
     public int updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, user.getName());
-        values.put(KEY_ADDRESS, user.getAddress());
+        values.put(COLUMN_USER_NAME, user.getUserName());
+        values.put(COLUMN_USER_SKILL, user.getSkillLevel());
     // updating row
         return db.update(TABLE_USERS, values, KEY_ID + "= ?",
-        new String[]{String.valueOf(user.getId())});
+        new String[]{String.valueOf(user.getuID())});
     }
 
     // Deleting a user
     public void deleteUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_USERS, KEY_ID + "= ?",
-        new String[] { String.valueOf(user.getId()) });
+        new String[] { String.valueOf(user.getuID()) });
         db.close();
     }
 }
