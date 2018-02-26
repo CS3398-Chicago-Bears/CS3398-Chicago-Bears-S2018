@@ -7,5 +7,5 @@
     <string name="completed">Completed</string>
     <string name="back">Back</string>
     <string name="add_names">Please enter player\'s name. Only one name per line.</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="error_valid_name_password">Wrong User Name or Passowrd</string>
 </resources>
