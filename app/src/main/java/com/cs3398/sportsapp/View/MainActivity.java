@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*if(authenticator.validate(name.getText().toString(),password.getText().toString())){
-                    Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-                    startActivity(intent);
-                }*/
+//                if(authenticator.validate(name.getText().toString(),password.getText().toString())){
+//                    Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+//                    startActivity(intent);
+//                }
                 verifyFromSQLite();
             }
         });
