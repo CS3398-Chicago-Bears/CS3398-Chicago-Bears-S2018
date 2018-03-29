@@ -1,10 +1,7 @@
-language: java
+language: android
 
-jdk:
-  - oraclejdk8
-  
-script: ./gradlew build
-
-#sudo false # faster builds
+android:
+  components:
+    - build-tools-3.0.1
 
 
