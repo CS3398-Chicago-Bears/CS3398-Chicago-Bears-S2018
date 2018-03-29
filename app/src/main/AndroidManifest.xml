@@ -23,6 +23,8 @@
         <activity android:name=".View.ProfileActivity" />
         <activity android:name=".View.FirstRoundActivity" />
         <activity android:name=".View.SecondRoundActivity" />
+        <activity android:name=".View.ThirdRoundActivity" />
+        <activity android:name=".View.WinnerActivity" />
         <activity android:name=".View.CreateAccountActivity">
         </activity>
 

@@ -55,23 +55,7 @@ public class FirstRoundActivity extends AppCompatActivity {
         round1ContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*if (user1.isChecked())
-                    winner1 = user1.getText().toString();
-                else
-                    winner1 = user2.getText().toString();
-                if (user3.isChecked())
-                    winner2 = user3.getText().toString();
-                else
-                    winner2 = user4.getText().toString();
-                if (user5.isChecked())
-                    winner3 = user5.getText().toString();
-                else
-                    winner3 = user6.getText().toString();
-                if (user7.isChecked())
-                    winner4 = user7.getText().toString();
-                else
-                    winner4 = user8.getText().toString();
-*/
+
                 Intent intent = new Intent(FirstRoundActivity.this, SecondRoundActivity.class);
                 intent.putExtra("winner1", winner1);
                 intent.putExtra("winner2", winner2);
