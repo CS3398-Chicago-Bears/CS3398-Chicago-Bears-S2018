@@ -23,6 +23,7 @@
         <activity android:name=".View.MapsActivity" />
         <activity android:name=".View.ProfileActivity" />
         <activity android:name=".View.FirstRoundActivity" />
+        <activity android:name=".View.SecondRoundActivity" />
         <activity android:name=".View.CreateAccountActivity">
         </activity>
     </application>
