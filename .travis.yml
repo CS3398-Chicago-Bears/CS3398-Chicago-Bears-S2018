@@ -7,9 +7,13 @@ android:
     - tools
     - platform-tools
     - tools
-    - build-tools-26.0.1
+    - android-22
+    - android-24
     - android-26
+    - build-tools-24.0.2
+    - build-tools-26.0.1
     - sys-img-armeabi-v7a-android-22
+    - extra-android-m2repository
     
 before_install:
   - yes | sdkmanager "platforms;android-26"
