@@ -15,9 +15,11 @@ android:
     - sys-img-armeabi-v7a-android-22
     - extra-android-m2repository
     
-#before_install:
-#  - yes | sdkmanager "platforms;android-26"
-install: skip
+before_install:
+  - yes | sudo sdkmanager --licenses
+  - yes | sdkmanager "platforms;android-26"
+  
+#install: skip
 
 script:
    - ./gradlew build
