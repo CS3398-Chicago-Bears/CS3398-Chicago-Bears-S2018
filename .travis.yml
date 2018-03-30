@@ -10,7 +10,7 @@ android:
     - extra-android-m2repository
     
 before_install:
-  - echo yes | sdkmanager --licenses
+  - yes | sdkmanager "platforms;android-26"
   
 before_script:
   # Create and start emulator
