@@ -9,6 +9,7 @@ android:
     
 before_install:
 - yes | sdkmanager "platforms;android-26"
+- chmod +x gradlew
 
 script:
    - ./gradlew build app
