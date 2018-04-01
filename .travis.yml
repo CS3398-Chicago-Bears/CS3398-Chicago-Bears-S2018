@@ -1,19 +1,24 @@
 language: android
 jdk: oraclejdk8
-sudo: false
+#sudo: false
 
 android:
   components:
+    - tools
     - platform-tools
     - tools
-    - build-tools-24.0.2
     - android-22
     - android-24
+    - android-26
+    - build-tools-24.0.2
+    - build-tools-26.0.1
+    - build-tools-26.0.2
     - sys-img-armeabi-v7a-android-22
     - extra-android-m2repository
     
 before_install:
-- yes | sdkmanager "platforms;android-26"
+  - yes | sdkmanager "platforms;android-26"
+  #- yes | sdkmanager --update
 
 before_script:
   # Create and start emulator
