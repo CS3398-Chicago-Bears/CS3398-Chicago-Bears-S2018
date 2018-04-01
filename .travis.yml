@@ -17,6 +17,7 @@ android:
     
 before_install:
   - yes | sdkmanager "platforms;android-26"
+  - yes | sdkmanager "Android SDK Build-Tools 26.0.2"
   #- yes | sdkmanager --update
 
 before_script:
