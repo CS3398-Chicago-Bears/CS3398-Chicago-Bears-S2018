@@ -17,6 +17,6 @@ android:
     
 before_install:
   - yes | sdkmanager "platforms;android-26"
-  - yes | sdkmanager --upgrade
+  - yes | sdkmanager --update
 
 script: ./gradlew connectedAndroidTest
