@@ -17,7 +17,7 @@ android:
     
 before_install:
   - yes | sdkmanager "platforms;android-26"
-  - yes | sdkmanager --update
+  #- yes | sdkmanager --update
 
 before_script:
   # Create and start emulator
