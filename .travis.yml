@@ -18,6 +18,7 @@ android:
     
 before_install:
   - yes | sdkmanager "platforms;android-26"
+  - chmod +x gradlew
   #- yes | sdkmanager --update
 
 before_script:
