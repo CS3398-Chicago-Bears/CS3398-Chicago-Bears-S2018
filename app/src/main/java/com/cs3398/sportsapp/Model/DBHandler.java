@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-// to do : add info for map data (location variable)
-//         rankings linked to database?
+// The database that operates user info given to it from app operation.
 
 public class DBHandler extends SQLiteOpenHelper {
+    // Initializing the database
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
@@ -24,6 +24,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_USER_PASSWORD= "user_password";
     private static final String COLUMN_USER_SKILL= "user_skill";
 
+    // Exceptions and Overrides
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USERS + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
             + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_SKILL + " INTEGER" + ")";
@@ -103,19 +104,21 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return false;
     }
+    
     // Getting one user
-    // needs adjusting to return single user info
-    public static User getUser() {
-        /*SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_USERS, new String[]{KEY_ID,
-                KEY_NAME, KEY_ADDRESS}, KEY_ID + "=?",
-        new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
-        User contact = new User(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2));
-    // return user*/
-        return null;
+    public User getUser() {
+      User thisUser = new User();
+      String selectQuery = "SELECT * FROM" + TABLE_USERS;
+      SQLiteDatabase db = this.getWritableDatabase();
+      Cursor cursor = db.rawQuery(selectQuery, null);
+
+      User user = new User();
+      user.setuID(Integer.parseInt(cursor.getString(0)));
+      user.setUserName(cursor.getString(1));
+      user.setSkillLevel(cursor.getInt(2));
+      thisUser = user;
+    // return user
+        return thisUser;
     }
 
     // Getting All Users
