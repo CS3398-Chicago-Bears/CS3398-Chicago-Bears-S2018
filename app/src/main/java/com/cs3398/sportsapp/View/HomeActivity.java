@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.cs3398.sportsapp.R;
 
 public class HomeActivity extends AppCompatActivity {
-    private Button search, bracket;
+    private Button search, bracket, profile, friends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,8 @@ public class HomeActivity extends AppCompatActivity {
 
         search = (Button)findViewById(R.id.search);
         bracket = (Button)findViewById(R.id.bracket);
+        profile = (Button)findViewById(R.id.profile);
+        friends = (Button)findViewById(R.id.friends);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,5 +38,24 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,ProfileActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        friends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,FriendsListActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
     }
 }

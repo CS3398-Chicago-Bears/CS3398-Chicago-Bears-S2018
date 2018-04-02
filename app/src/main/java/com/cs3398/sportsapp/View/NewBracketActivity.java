@@ -19,9 +19,6 @@ public class NewBracketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newbracket);
 
-
-
-
         create = (Button)findViewById(R.id.addPlayerDone);
         backNewBracket = (Button)findViewById(R.id.backNewBracket);
 

@@ -8,11 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-// The database that stores, updates, deletes and counts user profiles uploaded
-// to the database from app operation
+// to do : add info for map data (location variable)
+//         rankings linked to database?
 
 public class DBHandler extends SQLiteOpenHelper {
-    // Initializing the database for program
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
@@ -29,7 +28,6 @@ public class DBHandler extends SQLiteOpenHelper {
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
             + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_SKILL + " INTEGER" + ")";
 
-    // override and exception handler functions
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -105,24 +103,19 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return false;
     }
-
     // Getting one user
-    public User getUser(int id) {
-        User thisUser = new User();
-        String selectQuery = "SELECT * FROM" + TABLE_USERS;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        cursor.moveToFirst();
-
-        User user = new User();
-        user.setuID(Integer.parseInt(cursor.getString(0)));
-        user.setUserName(cursor.getString(1));
-        user.setSkillLevel(cursor.getInt(2));
-
-        thisUser = user;
-    // return user
-        return thisUser;
+    // needs adjusting to return single user info
+    public static User getUser() {
+        /*SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USERS, new String[]{KEY_ID,
+                KEY_NAME, KEY_ADDRESS}, KEY_ID + "=?",
+        new String[]{String.valueOf(id)}, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+        User contact = new User(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2));
+    // return user*/
+        return null;
     }
 
     // Getting All Users
