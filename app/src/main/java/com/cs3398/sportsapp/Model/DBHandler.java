@@ -106,9 +106,9 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     
     // Getting one user
-    public User getUser() {
+    public User getUser(String name) {
       User thisUser = new User();
-      String selectQuery = "SELECT * FROM" + TABLE_USERS;
+      String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE name='" + name + "'";
       SQLiteDatabase db = this.getWritableDatabase();
       Cursor cursor = db.rawQuery(selectQuery, null);
 
