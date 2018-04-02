@@ -105,7 +105,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     // Getting one user
     // needs adjusting to return single user info
-    public User getUser(int id) {
+    public static User getUser() {
         /*SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_USERS, new String[]{KEY_ID,
                 KEY_NAME, KEY_ADDRESS}, KEY_ID + "=?",
