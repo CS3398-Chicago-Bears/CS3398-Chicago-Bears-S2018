@@ -8,7 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+// The database that stores, updates, deletes and counts user profiles uploaded
+// to the database from app operation
+
 public class DBHandler extends SQLiteOpenHelper {
+    // Initializing the database for program
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
@@ -25,6 +29,7 @@ public class DBHandler extends SQLiteOpenHelper {
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
             + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_SKILL + " INTEGER" + ")";
 
+    // override and exception handler functions
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -103,7 +108,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // Getting one user
     public User getUser(int id) {
-    //List<User> userList = new ArrayList<User>();
         User thisUser = new User();
         String selectQuery = "SELECT * FROM" + TABLE_USERS;
         SQLiteDatabase db = this.getWritableDatabase();
