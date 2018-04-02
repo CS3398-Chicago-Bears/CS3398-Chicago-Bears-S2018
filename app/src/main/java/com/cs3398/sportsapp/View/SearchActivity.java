@@ -10,7 +10,7 @@ import com.cs3398.sportsapp.R;
 
 
 public class SearchActivity extends AppCompatActivity {
-    private Button search, backSearch;
+    private Button search, backSearch, map;
     private EditText searchLocation;
 
     @Override
@@ -21,6 +21,15 @@ public class SearchActivity extends AppCompatActivity {
         search = (Button)findViewById(R.id.searchSearch);
         backSearch = (Button)findViewById(R.id.backSearch);
         searchLocation = (EditText)findViewById(R.id.enterLocationText);
+        map = (Button)findViewById(R.id.mapButton);
+
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchActivity.this,MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         search.setOnClickListener(new View.OnClickListener() {
