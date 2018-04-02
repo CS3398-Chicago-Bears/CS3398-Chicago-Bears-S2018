@@ -8,9 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-// to do : add info for map data (location variable)
-//         rankings linked to database?
-
 public class DBHandler extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 1;
@@ -103,19 +100,25 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return false;
     }
+
     // Getting one user
-    // needs adjusting to return single user info
     public User getUser(int id) {
-        /*SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_USERS, new String[]{KEY_ID,
-                KEY_NAME, KEY_ADDRESS}, KEY_ID + "=?",
-        new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
-        User contact = new User(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2));
-    // return user*/
-        return null;
+    //List<User> userList = new ArrayList<User>();
+        User thisUser = new User();
+        String selectQuery = "SELECT * FROM" + TABLE_USERS;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        cursor.moveToFirst();
+
+        User user = new User();
+        user.setuID(Integer.parseInt(cursor.getString(0)));
+        user.setUserName(cursor.getString(1));
+        user.setSkillLevel(cursor.getInt(2));
+
+        thisUser = user;
+    // return user
+        return thisUser;
     }
 
     // Getting All Users
