@@ -1,13 +1,16 @@
 package com.cs3398.sportsapp.View;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.*;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.cs3398.sportsapp.Model.DBHandler;
 import com.cs3398.sportsapp.Model.User;
