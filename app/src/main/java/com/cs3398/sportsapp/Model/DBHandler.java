@@ -107,18 +107,22 @@ public class DBHandler extends SQLiteOpenHelper {
     
     // Getting one user
     public User getUser(String name) {
-      User thisUser = new User();
-      String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE name='" + name + "'";
-      SQLiteDatabase db = this.getWritableDatabase();
-      Cursor cursor = db.rawQuery(selectQuery, null);
-
-      User user = new User();
-      user.setuID(Integer.parseInt(cursor.getString(0)));
-      user.setUserName(cursor.getString(1));
-      user.setSkillLevel(cursor.getInt(2));
-      thisUser = user;
-    // return user
-        return thisUser;
+        String [] columns ={
+                KEY_ID, COLUMN_USER_NAME
+        };
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = COLUMN_USER_NAME + " =?";
+        String[] selectionArgs = {name};
+        Cursor cursor = db.query(TABLE_USERS,columns,selectQuery,selectionArgs,null,null,null);
+        cursor.moveToFirst();
+        db.close();
+        User user = new User();
+        user.setuID(cursor.getInt(0));
+        user.setUserName(cursor.getString(1));
+        //user.setSkillLevel(cursor.getInt(2));
+        cursor.close();
+        // return user
+        return user;
     }
 
     // Getting All Users
@@ -140,6 +144,7 @@ public class DBHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
     // return contact list
+        cursor.close();
         return userList;
     }
 
