@@ -16,7 +16,7 @@ import com.cs3398.sportsapp.R;
 public class MainActivity extends AppCompatActivity {
     private EditText name, password;
     private Button login, createNewAccount;
-    private DBHandler databaseHelper;
+    public static DBHandler databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

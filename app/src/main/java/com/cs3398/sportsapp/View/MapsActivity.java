@@ -3,6 +3,8 @@ package com.cs3398.sportsapp.View;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.cs3398.sportsapp.Model.DBHandler;
+import com.cs3398.sportsapp.Model.User;
 import com.cs3398.sportsapp.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,12 +40,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        User user = MainActivity.databaseHelper.getUser("jeff");
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(29.8884, -97.9384);
         LatLng jeffrey = new LatLng(30.1593586, -97.8341264);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Dr.Lehr's favorite Chicago Bears"));
-        mMap.addMarker(new MarkerOptions().position(jeffrey).title("Jeff's house"));
+        mMap.addMarker(new MarkerOptions().position(jeffrey).title(user.getUserName()));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

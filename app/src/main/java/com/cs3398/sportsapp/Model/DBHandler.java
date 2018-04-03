@@ -25,9 +25,9 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_USER_SKILL= "user_skill";
 
     // Exceptions and Overrides
-    private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USERS + "("
-            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_SKILL + " INTEGER" + ")";
+    private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USERS + " ("
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_USER_NAME + " TEXT, "
+            + COLUMN_USER_PASSWORD + " TEXT, " + COLUMN_USER_SKILL + " INTEGER" + ")";
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -106,9 +106,9 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     
     // Getting one user
-    public User getUser() {
+    public User getUser(String name) {
       User thisUser = new User();
-      String selectQuery = "SELECT * FROM" + TABLE_USERS;
+      String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE name='" + name + "'";
       SQLiteDatabase db = this.getWritableDatabase();
       Cursor cursor = db.rawQuery(selectQuery, null);
 
