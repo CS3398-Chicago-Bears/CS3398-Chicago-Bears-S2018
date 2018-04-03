@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-// to do : add info for map data (location variable)
-//         rankings linked to database?
+// The database that operates user info given to it from app operation.
 
 public class DBHandler extends SQLiteOpenHelper {
+    // Initializing the database
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
@@ -24,9 +24,10 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_USER_PASSWORD= "user_password";
     private static final String COLUMN_USER_SKILL= "user_skill";
 
+    // Exceptions and Overrides
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USERS + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_SKILL + " INTEGER" + ")";
+            + COLUMN_USER_PASSWORD + " TEXT, " + COLUMN_USER_SKILL + " INTEGER)";
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -49,7 +50,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_NAME, user.getUserName()); // user Name
         values.put(COLUMN_USER_PASSWORD, user.getPassword()); // user preference
-        //values.put(COLUMN_USER_SKILL, user.getSkillLevel());
+        values.put(COLUMN_USER_SKILL, user.getSkillLevel());
     // Inserting Row
         db.insert(TABLE_USERS, null, values);
         db.close(); // Closing database connection
@@ -103,19 +104,25 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return false;
     }
+    
     // Getting one user
-    // needs adjusting to return single user info
-    public User getUser(int id) {
-        /*SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_USERS, new String[]{KEY_ID,
-                KEY_NAME, KEY_ADDRESS}, KEY_ID + "=?",
-        new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
-        User contact = new User(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2));
-    // return user*/
-        return null;
+    public User getUser(String name) {
+        String [] columns ={
+                KEY_ID, COLUMN_USER_NAME, COLUMN_USER_SKILL
+        };
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = COLUMN_USER_NAME + " =?";
+        String[] selectionArgs = {name};
+        Cursor cursor = db.query(TABLE_USERS,columns,selectQuery,selectionArgs,null,null,null);
+        cursor.moveToFirst();
+        db.close();
+        User user = new User();
+        user.setuID(cursor.getInt(0));
+        user.setUserName(cursor.getString(1));
+        user.setSkillLevel(cursor.getInt(2));
+        cursor.close();
+        // return user
+        return user;
     }
 
     // Getting All Users
@@ -137,6 +144,7 @@ public class DBHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
     // return contact list
+        cursor.close();
         return userList;
     }
 

@@ -16,7 +16,7 @@ import com.cs3398.sportsapp.R;
 public class MainActivity extends AppCompatActivity {
     private EditText name, password;
     private Button login, createNewAccount;
-    private DBHandler databaseHelper;
+    public static DBHandler databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(databaseHelper.checkUser(name.getText().toString(), password.getText().toString())){
             Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+            intent.putExtra("user", name.getText().toString());
             startActivity(intent);
         }
         else{
