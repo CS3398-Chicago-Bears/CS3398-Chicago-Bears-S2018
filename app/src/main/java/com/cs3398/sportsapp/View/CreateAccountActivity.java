@@ -46,8 +46,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                     user.setUserName(uName.getText().toString());
                     user.setPassword(pWord.getText().toString());
                     user.setSkillLevel(dropdown.getSelectedItemPosition());
-                    Log.d("test", user.getUserName());
-                    Log.d("test", user.getPassword());
                     databaseHelper.addUser(user);
                     Intent i = new Intent(CreateAccountActivity.this,MainActivity.class);
                     startActivity(i);

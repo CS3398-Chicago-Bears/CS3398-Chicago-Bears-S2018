@@ -27,7 +27,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // Exceptions and Overrides
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USERS + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_SKILL + " INTEGER" + ")";
+            + COLUMN_USER_PASSWORD + " TEXT, " + COLUMN_USER_SKILL + " INTEGER)";
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -50,7 +50,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_NAME, user.getUserName()); // user Name
         values.put(COLUMN_USER_PASSWORD, user.getPassword()); // user preference
-        //values.put(COLUMN_USER_SKILL, user.getSkillLevel());
+        values.put(COLUMN_USER_SKILL, user.getSkillLevel());
     // Inserting Row
         db.insert(TABLE_USERS, null, values);
         db.close(); // Closing database connection
@@ -108,7 +108,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // Getting one user
     public User getUser(String name) {
         String [] columns ={
-                KEY_ID, COLUMN_USER_NAME
+                KEY_ID, COLUMN_USER_NAME, COLUMN_USER_SKILL
         };
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = COLUMN_USER_NAME + " =?";
@@ -119,7 +119,7 @@ public class DBHandler extends SQLiteOpenHelper {
         User user = new User();
         user.setuID(cursor.getInt(0));
         user.setUserName(cursor.getString(1));
-        //user.setSkillLevel(cursor.getInt(2));
+        user.setSkillLevel(cursor.getInt(2));
         cursor.close();
         // return user
         return user;
