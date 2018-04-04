@@ -119,7 +119,7 @@ public class DBHandler extends SQLiteOpenHelper {
         User user = new User();
         user.setuID(cursor.getInt(0));
         user.setUserName(cursor.getString(1));
-        user.setSkillLevel(cursor.getInt(2));
+        user.setSkillLevel(cursor.getString(2));
         cursor.close();
         // return user
         return user;
@@ -138,7 +138,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 User user = new User();
                 user.setuID(Integer.parseInt(cursor.getString(0)));
                 user.setUserName(cursor.getString(1));
-                user.setSkillLevel(cursor.getInt(2));
+                user.setSkillLevel(cursor.getString(2));
     // Adding contact to list
                 userList.add(user);
             } while (cursor.moveToNext());
