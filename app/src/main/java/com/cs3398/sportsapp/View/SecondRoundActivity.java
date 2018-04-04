@@ -28,6 +28,7 @@ public class SecondRoundActivity extends AppCompatActivity {
         Intent intent = getIntent();
         round2ContinueButton = (Button)findViewById(R.id.second_round_continue);
         round2SaveButton = (Button)findViewById(R.id.second_round_save);
+        final String userName = getIntent().getStringExtra("userName");
 
         bracketName = intent.getExtras().getString("bracketName");
         player1 = intent.getExtras().getString("player1");
@@ -85,6 +86,7 @@ public class SecondRoundActivity extends AppCompatActivity {
                 intent.putExtra("r2winner2", r2winner2);
                 intent.putExtra("r2loser1", r2loser1);
                 intent.putExtra("r2loser2", r2loser2);
+                intent.putExtra("userName", userName);
 
                 startActivity(intent);
             }
@@ -94,6 +96,7 @@ public class SecondRoundActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SecondRoundActivity.this,BracketActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });

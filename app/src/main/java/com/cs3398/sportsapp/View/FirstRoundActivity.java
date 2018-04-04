@@ -21,6 +21,7 @@ public class FirstRoundActivity extends AppCompatActivity {
     String winner1, winner2, winner3, winner4;
     String loser1, loser2, loser3, loser4;
 
+
     ArrayList<Bracket> bracketList = new ArrayList<Bracket>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class FirstRoundActivity extends AppCompatActivity {
         Intent intent = getIntent();
         round1ContinueButton = (Button)findViewById(R.id.first_round_continue);
         round1SaveButton = (Button)findViewById(R.id.first_round_save);
+        final String userName = getIntent().getStringExtra("userName");
 
         bracketName = intent.getExtras().getString("bracketName");
         name1 = intent.getExtras().getString("player1");
@@ -89,6 +91,7 @@ public class FirstRoundActivity extends AppCompatActivity {
                 intent.putExtra("r1loser2", loser2);
                 intent.putExtra("r1loser3", loser3);
                 intent.putExtra("r1loser4", loser4);
+                intent.putExtra("userName", userName);
                 //intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -98,6 +101,7 @@ public class FirstRoundActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FirstRoundActivity.this, BracketActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });

@@ -27,10 +27,10 @@ public class HomeActivity extends AppCompatActivity {
         friends = (Button)findViewById(R.id.friends);
 
         final String userName = getIntent().getStringExtra("userName");
-        DBHandler db = new DBHandler(HomeActivity.this);
-        TextView t = (TextView)findViewById(R.id.textView4);
-        User u = db.getUser(userName);
-        t.setText(u.getUserName() + " "+ u.getLatitude()+" "+String.valueOf(u.getLongitude()));
+//        DBHandler db = new DBHandler(HomeActivity.this);
+//        TextView t = (TextView)findViewById(R.id.textView4);
+//        User u = db.getUser(userName);
+//        t.setText(u.getUserName() + " "+ u.getLatitude()+" "+String.valueOf(u.getLongitude()));
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                     Intent intent = new Intent(HomeActivity.this,BracketActivity.class);
+                    intent.putExtra("userName", userName);
                     startActivity(intent);
 
             }
