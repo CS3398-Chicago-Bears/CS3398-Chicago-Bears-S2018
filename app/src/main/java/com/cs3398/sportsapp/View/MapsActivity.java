@@ -3,6 +3,8 @@ package com.cs3398.sportsapp.View;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.cs3398.sportsapp.Model.DBHandler;
+import com.cs3398.sportsapp.Model.User;
 import com.cs3398.sportsapp.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -14,6 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    public static DBHandler databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +41,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        final String userName = getIntent().getStringExtra("userName");
         mMap = googleMap;
         float zoom = 11;
+        //User user;
+        //user = databaseHelper.getUser(userName);
+
+        //LatLng thisUser = new LatLng(user.getLatitude(), user.getLongitude());
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(29.8884, -97.9384);
@@ -54,6 +62,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(miguel).title("Miguel"));
         mMap.addMarker(new MarkerOptions().position(mason).title("Mason"));
         mMap.addMarker(new MarkerOptions().position(james).title("James"));
+        //if(thisUser != null)
+            //mMap.addMarker(new MarkerOptions().position(thisUser).title("You"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(james, zoom));
     }
 }
