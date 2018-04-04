@@ -60,7 +60,11 @@
         <activity
             android:name=".View.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".View.FriendsListActivity"></activity>
+        <activity android:name=".View.FriendsListActivity" />
+        <activity
+            android:name=".View.SearchUsernameActivity"
+            android:label="@string/title_activity_search_username"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

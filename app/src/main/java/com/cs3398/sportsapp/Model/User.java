@@ -7,18 +7,21 @@ public class User {
     private String userName;
     private String password;
     private ArrayList<String> sportsPreference = new ArrayList<String>();
-    private int skillLevel;
+    private String skillLevel;
     private int wins;
     private int losses;
-    private double longitude;    // In place of zip code
-    private double latitude;     // In place of zip code
-    private ArrayList<Bracket> currentBrackets;
-    private ArrayList<Bracket> completedBrackets;
 
+    // In place of zip code
+    private double latitude;
+    private double longitude;
+
+    //Change from String to 'Bracket' type
+    private ArrayList<String> brackets;
 
     public int getuID() {
         return uID;
     }
+
     public String getUserName(){return userName;}
     public String getPassword(){return password;}
 
@@ -30,56 +33,67 @@ public class User {
                 sports.append("\n");
             }
         }
+
         return sports.toString();
     }
-    public int getSkillLevel() {
+
+    public String getSkillLevel() {
         return skillLevel;
     }
+
     public double getLatitude() {
         return latitude;
     }
+
     public double getLongitude() {
         return longitude;
     }
+
     public int getLosses() {
         return losses;
     }
+
     public int getWins() {
         return wins;
     }
-    public ArrayList<Bracket> getCurrentBrackets() {
-        return currentBrackets;
-    }
-    public ArrayList<Bracket> getCompletedBrackets() {return completedBrackets; }
 
+    public ArrayList<String> getBracket() {
+        return brackets;
+    }
 
     public void setuID(int uID) {
         this.uID = uID;
     }
+
     public void addSportsPreference(String sportsPreference) {
         this.sportsPreference.add(sportsPreference);
     }
-    public void setSkillLevel(int skillLevel) {
+
+    public void setSkillLevel(String skillLevel) {
         this.skillLevel = skillLevel;
     }
+
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
+
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-    public void setCurrentBrackets(ArrayList<Bracket> bracket) {
-        currentBrackets = bracket;
+
+    public void setBracket(ArrayList<String> bracket) {
+        brackets = bracket;
     }
-    public void setCompletedBrackets(ArrayList<Bracket> bracket) {
-        completedBrackets = bracket;
-    }
+
     public void setWins(int wins) {
         this.wins = wins;
     }
+
     public void setLosses(int losses) {
         this.losses = losses;
     }
+
     public void setUserName(String Name){this.userName = Name;}
+
     public void setPassword(String Password){this.password = Password;}
 }
