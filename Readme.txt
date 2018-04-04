@@ -4,12 +4,13 @@ The sports finder app will help locate local athletes based on a desired sport a
 
 The current status of our project:
   
-    GUI Page for login page, home page, brackets page, and maps page created.
-    User profiles created.
-    Database implemented - user profiles are connected to the database.
-    Maps activity created.
-    Google maps API key obtained.
-    Figured out most of the issues with Android Studio. 
+    - GUI Page for login page, home page, brackets pages, and maps page created.
+    - User profiles created.
+    - Database implemented - user profiles are connected to the database.
+    - Maps activity created.
+    - Google maps API key obtained.
+    - Figured out most of the issues with Android Studio. 
+    - Ability to create and complete a bracket.
    
    
 Future developments:
@@ -17,4 +18,6 @@ Future developments:
   - Profile page for users
   - Implement matchmaking system
   - Locate local competitors
+  - View and access current and completed brackets
+  - Revamped GUI
   
