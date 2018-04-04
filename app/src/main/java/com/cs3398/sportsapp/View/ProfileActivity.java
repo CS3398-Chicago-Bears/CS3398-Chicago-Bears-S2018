@@ -25,7 +25,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Map;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
+
 
 /**
  * Created by Guy on 2/19/2018.
@@ -87,10 +87,10 @@ public class ProfileActivity extends AppCompatActivity {
         location.setText(locationStr);
         submit.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                Intent i = new Intent(ProfileActivity.this, SearchActivity.class);
+                Intent i = new Intent(ProfileActivity.this, SearchUsernameActivity.class);
                 String message = search.getQuery().toString();
                 if (!search.getQuery().toString().equals("")) {
-                    i.putExtra(EXTRA_MESSAGE, message);
+                    i.putExtra("QUERY", message);
                     startActivity(i);
 
                 }
