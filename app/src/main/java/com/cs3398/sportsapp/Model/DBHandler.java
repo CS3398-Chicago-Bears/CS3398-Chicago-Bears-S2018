@@ -104,7 +104,7 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return false;
     }
-    
+
     // Getting one user
     public User getUser() {
       User thisUser = new User();
