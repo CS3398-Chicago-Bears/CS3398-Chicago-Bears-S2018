@@ -15,6 +15,7 @@ public class BracketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bracket);
+        final String userName = getIntent().getStringExtra("userName");
 
         newBracket = (Button)findViewById(R.id.newBracket);
         currentBracket = (Button)findViewById(R.id.current);
@@ -25,6 +26,7 @@ public class BracketActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BracketActivity.this, NewBracketActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
@@ -32,7 +34,8 @@ public class BracketActivity extends AppCompatActivity {
         currentBracket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(BracketActivity.this, BracketActivity.class);
+                Intent intent = new Intent(BracketActivity.this, CurrentBracketsActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
@@ -40,7 +43,8 @@ public class BracketActivity extends AppCompatActivity {
         completedBracket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(BracketActivity.this, BracketActivity.class);
+                Intent intent = new Intent(BracketActivity.this, CompletedBracketsActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
@@ -49,6 +53,7 @@ public class BracketActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BracketActivity.this, HomeActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });

@@ -1,28 +1,29 @@
 package com.cs3398.sportsapp.View;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
 import com.cs3398.sportsapp.R;
 
-public class FriendsListActivity extends AppCompatActivity {
-    Button back;
+public class CurrentBracketsActivity extends AppCompatActivity {
+    private Button backCurrent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends_list);
-        back = (Button)findViewById(R.id.back);
+        setContentView(R.layout.activity_current_brackets);
         final String userName = getIntent().getStringExtra("userName");
+        backCurrent = (Button)findViewById(R.id.current_bracket_back);
 
-        back.setOnClickListener(new View.OnClickListener() {
+        backCurrent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FriendsListActivity.this,HomeActivity.class);
-                intent.putExtra("userName",userName);
+                Intent intent = new Intent(CurrentBracketsActivity.this, BracketActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
-        });
-    }
+        });    }
 }

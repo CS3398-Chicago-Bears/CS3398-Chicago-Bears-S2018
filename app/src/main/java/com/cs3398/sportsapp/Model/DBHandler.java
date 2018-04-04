@@ -23,11 +23,14 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_USER_NAME = "name";
     private static final String COLUMN_USER_PASSWORD= "user_password";
     private static final String COLUMN_USER_SKILL= "user_skill";
+    private static final String COLUMN_USER_LATITUDE= "user_latitude";
+    private static final String COLUMN_USER_LONGITUDE= "user_longitude";
 
     // Exceptions and Overrides
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USERS + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_SKILL + " INTEGER" + ")";
+            + COLUMN_USER_PASSWORD + " TEXT, " + COLUMN_USER_SKILL + " INTEGER, " + COLUMN_USER_LATITUDE
+            + " DOUBLE, " + COLUMN_USER_LONGITUDE + " DOUBLE)";
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -50,7 +53,9 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_NAME, user.getUserName()); // user Name
         values.put(COLUMN_USER_PASSWORD, user.getPassword()); // user preference
-        //values.put(COLUMN_USER_SKILL, user.getSkillLevel());
+        values.put(COLUMN_USER_SKILL, user.getSkillLevel());
+        values.put(COLUMN_USER_LATITUDE, user.getLatitude());
+        values.put(COLUMN_USER_LONGITUDE, user.getLongitude());
     // Inserting Row
         db.insert(TABLE_USERS, null, values);
         db.close(); // Closing database connection
@@ -106,19 +111,26 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // Getting one user
-    public User getUser() {
-      User thisUser = new User();
-      String selectQuery = "SELECT * FROM" + TABLE_USERS;
-      SQLiteDatabase db = this.getWritableDatabase();
-      Cursor cursor = db.rawQuery(selectQuery, null);
-
-      User user = new User();
-      user.setuID(Integer.parseInt(cursor.getString(0)));
-      user.setUserName(cursor.getString(1));
-      user.setSkillLevel(cursor.getInt(2));
-      thisUser = user;
-    // return user
-        return thisUser;
+    public User getUser(String name) {
+        String [] columns ={
+                KEY_ID, COLUMN_USER_NAME, COLUMN_USER_SKILL,
+                COLUMN_USER_LATITUDE, COLUMN_USER_LONGITUDE
+        };
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = COLUMN_USER_NAME + " =?";
+        String[] selectionArgs = {name};
+        Cursor cursor = db.query(TABLE_USERS,columns,selectQuery,selectionArgs,null,null,null);
+        cursor.moveToFirst();
+        db.close();
+        User user = new User();
+        user.setuID(cursor.getInt(0));
+        user.setUserName(cursor.getString(1));
+        user.setSkillLevel(cursor.getString(2));
+        user.setLatitude(cursor.getDouble(3));
+        user.setLongitude(cursor.getDouble(4));
+        cursor.close();
+        // return user
+        return user;
     }
 
     // Getting All Users
@@ -134,12 +146,13 @@ public class DBHandler extends SQLiteOpenHelper {
                 User user = new User();
                 user.setuID(Integer.parseInt(cursor.getString(0)));
                 user.setUserName(cursor.getString(1));
-                user.setSkillLevel(cursor.getInt(2));
+                user.setSkillLevel(cursor.getString(2));
     // Adding contact to list
                 userList.add(user);
             } while (cursor.moveToNext());
         }
     // return contact list
+        cursor.close();
         return userList;
     }
 

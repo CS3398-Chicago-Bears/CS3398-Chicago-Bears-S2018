@@ -7,7 +7,7 @@ public class User {
     private String userName;
     private String password;
     private ArrayList<String> sportsPreference = new ArrayList<String>();
-    private int skillLevel;
+    private String skillLevel;
     private int wins;
     private int losses;
 
@@ -37,7 +37,7 @@ public class User {
         return sports.toString();
     }
 
-    public int getSkillLevel() {
+    public String getSkillLevel() {
         return skillLevel;
     }
 
@@ -69,7 +69,7 @@ public class User {
         this.sportsPreference.add(sportsPreference);
     }
 
-    public void setSkillLevel(int skillLevel) {
+    public void setSkillLevel(String skillLevel) {
         this.skillLevel = skillLevel;
     }
 
