@@ -42,6 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         User user = MainActivity.databaseHelper.getUser("jeff");
 
+
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(29.8884, -97.9384);
         LatLng jeffrey = new LatLng(30.1593586, -97.8341264);
