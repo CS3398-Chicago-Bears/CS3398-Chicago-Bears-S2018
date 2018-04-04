@@ -6,22 +6,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+
+import com.cs3398.sportsapp.Controller.BracketController;
+import com.cs3398.sportsapp.Model.Bracket;
 import com.cs3398.sportsapp.R;
 
+import java.util.ArrayList;
+
+
 public class FirstRoundActivity extends AppCompatActivity {
-    private Button round1ContinueButton;
-    String name1, name2, name3, name4, name5, name6, name7, name8;
+    private Button round1ContinueButton, round1SaveButton;
     private CheckBox user1, user2, user3, user4, user5, user6, user7, user8;
+    String bracketName, name1, name2, name3, name4, name5, name6, name7, name8;
     String winner1, winner2, winner3, winner4;
+    String loser1, loser2, loser3, loser4;
 
-
+    ArrayList<Bracket> bracketList = new ArrayList<Bracket>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_round_first_bracket);
         Intent intent = getIntent();
-        round1ContinueButton = (Button) findViewById(R.id.first_round_continue);
+        round1ContinueButton = (Button)findViewById(R.id.first_round_continue);
+        round1SaveButton = (Button)findViewById(R.id.first_round_save);
 
+        bracketName = intent.getExtras().getString("bracketName");
         name1 = intent.getExtras().getString("player1");
         name2 = intent.getExtras().getString("player2");
         name3 = intent.getExtras().getString("player3");
@@ -55,13 +64,40 @@ public class FirstRoundActivity extends AppCompatActivity {
         round1ContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                /*Bracket newBracket = new Bracket(bracketName, name1, name2, name3, name4, name5,
+                        name6, name7, name8, winner1, winner2, winner3, winner4, "", "",
+                        loser1, loser2, loser3, loser4, "", "");
+                bracketList.add(newBracket);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("brackets", bracketList);
+                */
                 Intent intent = new Intent(FirstRoundActivity.this, SecondRoundActivity.class);
-                intent.putExtra("winner1", winner1);
-                intent.putExtra("winner2", winner2);
-                intent.putExtra("winner3", winner3);
-                intent.putExtra("winner4", winner4);
+                intent.putExtra("bracketName", bracketName);
+                intent.putExtra("player1", name1);
+                intent.putExtra("player2", name2);
+                intent.putExtra("player3", name3);
+                intent.putExtra("player4", name4);
+                intent.putExtra("player5", name5);
+                intent.putExtra("player6", name6);
+                intent.putExtra("player7", name7);
+                intent.putExtra("player8", name8);
+                intent.putExtra("r1winner1", winner1);
+                intent.putExtra("r1winner2", winner2);
+                intent.putExtra("r1winner3", winner3);
+                intent.putExtra("r1winner4", winner4);
+                intent.putExtra("r1loser1", loser1);
+                intent.putExtra("r1loser2", loser2);
+                intent.putExtra("r1loser3", loser3);
+                intent.putExtra("r1loser4", loser4);
+                //intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
+        round1SaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FirstRoundActivity.this, BracketActivity.class);
                 startActivity(intent);
             }
         });
@@ -73,6 +109,7 @@ public class FirstRoundActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     winner1 = user1.getText().toString();
+                    loser1 = user2.getText().toString();
                 }
             }
         });
@@ -81,6 +118,7 @@ public class FirstRoundActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     winner1 = user2.getText().toString();
+                    loser1 = user1.getText().toString();
                 }
             }
         });
@@ -89,6 +127,7 @@ public class FirstRoundActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     winner2 = user3.getText().toString();
+                    loser2 = user4.getText().toString();
                 }
             }
         });
@@ -97,6 +136,7 @@ public class FirstRoundActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     winner2 = user4.getText().toString();
+                    loser2 = user3.getText().toString();
                 }
             }
         });
@@ -105,6 +145,7 @@ public class FirstRoundActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     winner3 = user5.getText().toString();
+                    loser3 = user6.getText().toString();
                 }
             }
         });
@@ -113,6 +154,7 @@ public class FirstRoundActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     winner3 = user6.getText().toString();
+                    loser3 = user5.getText().toString();
                 }
             }
         });
@@ -121,6 +163,7 @@ public class FirstRoundActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     winner4 = user7.getText().toString();
+                    loser4 = user8.getText().toString();
                 }
             }
         });
@@ -129,6 +172,7 @@ public class FirstRoundActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     winner4 = user8.getText().toString();
+                    loser4 = user7.getText().toString();
                 }
             }
         });
