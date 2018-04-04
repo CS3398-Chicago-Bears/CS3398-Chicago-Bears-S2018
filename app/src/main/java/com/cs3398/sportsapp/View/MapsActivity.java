@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 import com.cs3398.sportsapp.Model.DBHandler;
 import com.cs3398.sportsapp.Model.User;
 import com.cs3398.sportsapp.R;
@@ -58,7 +59,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(29.8884, -97.9384);
         LatLng jeffrey = new LatLng(u.getLatitude(), u.getLongitude());
         mMap.addMarker(new MarkerOptions().position(sydney).title("Dr.Lehr's favorite Chicago bears"));
-        mMap.addMarker(new MarkerOptions().position(jeffrey).title("Jeff"));
+        mMap.addMarker(new MarkerOptions().position(jeffrey).title(userName));
         mMap.addMarker(new MarkerOptions().position(taylor).title("Taylor"));
         mMap.addMarker(new MarkerOptions().position(miguel).title("Miguel"));
         mMap.addMarker(new MarkerOptions().position(mason).title("Mason"));
