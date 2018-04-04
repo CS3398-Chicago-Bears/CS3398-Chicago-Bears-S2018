@@ -29,8 +29,8 @@ public class HomeActivity extends AppCompatActivity {
         final String userName = getIntent().getStringExtra("userName");
 //        DBHandler db = new DBHandler(HomeActivity.this);
 //        TextView t = (TextView)findViewById(R.id.textView4);
-//        User u = db.getUser("miguell");
-//        t.setText(String.valueOf(u.getLongitude()));
+//        User u = db.getUser(userName);
+//        t.setText(u.getUserName() + " "+ u.getLatitude()+" "+String.valueOf(u.getLongitude()));
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
