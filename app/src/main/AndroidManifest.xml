@@ -41,6 +41,8 @@
         <activity android:name=".View.SecondRoundActivity" />
         <activity android:name=".View.ThirdRoundActivity" />
         <activity android:name=".View.WinnerActivity" />
+        <activity android:name=".View.CurrentBracketsActivity" />
+        <activity android:name=".View.CompletedBracketsActivity" />
         <activity android:name=".View.CreateAccountActivity" />
 
         <!--
