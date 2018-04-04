@@ -15,13 +15,14 @@ public class CurrentBracketsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_brackets);
-
+        final String userName = getIntent().getStringExtra("userName");
         backCurrent = (Button)findViewById(R.id.current_bracket_back);
 
         backCurrent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CurrentBracketsActivity.this, BracketActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });    }

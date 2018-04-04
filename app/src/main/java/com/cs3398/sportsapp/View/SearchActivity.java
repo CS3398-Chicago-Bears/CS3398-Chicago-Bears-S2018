@@ -51,6 +51,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SearchActivity.this,HomeActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });

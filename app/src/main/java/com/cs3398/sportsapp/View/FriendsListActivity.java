@@ -14,11 +14,13 @@ public class FriendsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
         back = (Button)findViewById(R.id.back);
+        final String userName = getIntent().getStringExtra("userName");
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FriendsListActivity.this,HomeActivity.class);
+                intent.putExtra("userName",userName);
                 startActivity(intent);
             }
         });

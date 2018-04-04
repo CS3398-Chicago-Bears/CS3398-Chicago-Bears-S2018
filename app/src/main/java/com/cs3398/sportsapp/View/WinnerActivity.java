@@ -28,6 +28,7 @@ public class WinnerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_winner_bracket);
         Intent intent = getIntent();
         winnerButton = (Button) findViewById(R.id.winner_button);
+        final String userName = getIntent().getStringExtra("userName");
 
         bracketName = intent.getExtras().getString("bracketName");
         player1 = intent.getExtras().getString("player1");
@@ -62,6 +63,7 @@ public class WinnerActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(WinnerActivity.this, BracketActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });

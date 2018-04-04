@@ -29,6 +29,7 @@ public class ThirdRoundActivity extends AppCompatActivity {
         Intent intent = getIntent();
         round3ContinueButton = (Button)findViewById(R.id.third_round_continue);
         round3SaveButton = (Button)findViewById(R.id.third_round_save);
+        final String userName = getIntent().getStringExtra("userName");
 
         bracketName = intent.getExtras().getString("bracketName");
         player1 = intent.getExtras().getString("player1");
@@ -88,6 +89,7 @@ public class ThirdRoundActivity extends AppCompatActivity {
                 intent.putExtra("r2loser2", r2loser2);
                 intent.putExtra("final_winner", r3winner);
                 intent.putExtra("final_loser", r3loser);
+                intent.putExtra("userName", userName);
 
                 startActivity(intent);
             }
@@ -96,6 +98,7 @@ public class ThirdRoundActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ThirdRoundActivity.this,BracketActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });

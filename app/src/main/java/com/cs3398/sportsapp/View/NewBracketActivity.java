@@ -24,12 +24,11 @@ public class NewBracketActivity extends AppCompatActivity implements Serializabl
 
     BracketController bc = new BracketController();
     Bracket newBracket = new Bracket();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newbracket);
-
+        final String userName = getIntent().getStringExtra("userName");
         create = (Button)findViewById(R.id.addPlayerDone);
         backNewBracket = (Button)findViewById(R.id.backNewBracket);
 
@@ -70,6 +69,7 @@ public class NewBracketActivity extends AppCompatActivity implements Serializabl
                 intent.putExtra("player6", player6);
                 intent.putExtra("player7", player7);
                 intent.putExtra("player8", player8);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
@@ -77,6 +77,7 @@ public class NewBracketActivity extends AppCompatActivity implements Serializabl
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(NewBracketActivity.this,BracketActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
