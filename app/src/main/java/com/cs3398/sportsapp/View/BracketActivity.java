@@ -32,7 +32,7 @@ public class BracketActivity extends AppCompatActivity {
         currentBracket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(BracketActivity.this, BracketActivity.class);
+                Intent intent = new Intent(BracketActivity.this, CurrentBracketsActivity.class);
                 startActivity(intent);
             }
         });
@@ -40,7 +40,7 @@ public class BracketActivity extends AppCompatActivity {
         completedBracket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(BracketActivity.this, BracketActivity.class);
+                Intent intent = new Intent(BracketActivity.this, CompletedBracketsActivity.class);
                 startActivity(intent);
             }
         });
