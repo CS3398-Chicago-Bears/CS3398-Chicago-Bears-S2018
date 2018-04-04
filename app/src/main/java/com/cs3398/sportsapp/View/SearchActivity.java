@@ -9,14 +9,19 @@ import android.widget.EditText;
 import com.cs3398.sportsapp.R;
 
 
+
 public class SearchActivity extends AppCompatActivity {
     private Button search, backSearch, map;
     private EditText searchLocation;
+    private String query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+
+
 
         search = (Button)findViewById(R.id.searchSearch);
         backSearch = (Button)findViewById(R.id.backSearch);
