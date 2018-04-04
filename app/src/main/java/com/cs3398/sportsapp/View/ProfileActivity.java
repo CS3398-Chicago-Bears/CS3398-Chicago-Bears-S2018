@@ -30,7 +30,9 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        DBHandler db = new DBHandler(ProfileActivity.this);
+        String userName = getIntent().getStringExtra("userName");
+        User u = db.getUser(userName);
 
 
         Button msg = findViewById(R.id.button2);
@@ -42,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
         //User user = DBHandler.getUser();
         User u1 = new User();
         u1.setUserName("Taylor Mauldin");
-        name.setText(u1.getUserName());
+        name.setText(String.valueOf(u.getLongitude()));
 
         u1.addSportsPreference("Basketball");
         u1.addSportsPreference("Baseball");
