@@ -16,7 +16,8 @@ public class User {
     private double longitude;
 
     //Change from String to 'Bracket' type
-    private ArrayList<String> brackets;
+    private ArrayList<Bracket> currentBrackets;
+    private ArrayList<Bracket> completedBrackets;
 
     public int getuID() {
         return uID;
@@ -57,8 +58,8 @@ public class User {
         return wins;
     }
 
-    public ArrayList<String> getBracket() {
-        return brackets;
+    public ArrayList<Bracket> getBracket() {
+        return currentBrackets;
     }
 
     public void setuID(int uID) {
@@ -81,8 +82,8 @@ public class User {
         this.longitude = longitude;
     }
 
-    public void setBracket(ArrayList<String> bracket) {
-        brackets = bracket;
+    public void setBracket(ArrayList<Bracket> bracket) {
+        currentBrackets = bracket;
     }
 
     public void setWins(int wins) {
