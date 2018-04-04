@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cs3398.sportsapp.Model.DBHandler;
+import com.cs3398.sportsapp.Model.User;
 import com.cs3398.sportsapp.R;
 
 
@@ -24,13 +25,17 @@ public class HomeActivity extends AppCompatActivity {
         bracket = (Button)findViewById(R.id.bracket);
         profile = (Button)findViewById(R.id.profile);
         friends = (Button)findViewById(R.id.friends);
+
+        final String userName = getIntent().getStringExtra("userName");
 //        DBHandler db = new DBHandler(HomeActivity.this);
 //        TextView t = (TextView)findViewById(R.id.textView4);
-//        t.setText(String.valueOf(db.getUser("miguel").getLongitude()));
+//        User u = db.getUser("miguell");
+//        t.setText(String.valueOf(u.getLongitude()));
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this,SearchActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
 
             }
@@ -49,6 +54,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this,ProfileActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
 
             }
@@ -58,6 +64,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this,FriendsListActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
 
             }
