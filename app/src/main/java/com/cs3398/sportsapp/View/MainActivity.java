@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(databaseHelper.checkUser(name.getText().toString(), password.getText().toString())){
             Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-            intent.putExtra("user", name.getText().toString());
+            intent.putExtra("userName", name.getText().toString());
             startActivity(intent);
         }
         else{

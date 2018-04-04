@@ -23,10 +23,12 @@ public class SearchActivity extends AppCompatActivity {
         searchLocation = (EditText)findViewById(R.id.enterLocationText);
         map = (Button)findViewById(R.id.mapButton);
 
+        final String userName = getIntent().getStringExtra("userName");
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SearchActivity.this,MapsActivity.class);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
