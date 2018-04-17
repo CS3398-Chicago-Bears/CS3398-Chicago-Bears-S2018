@@ -115,5 +115,56 @@ public class DBHandlerBracket extends SQLiteOpenHelper {
         values.put(COLUMN_R3WINNER, bracket.getFinalWinner());
         values.put(COLUMN_R3LOSER,  bracket.getFinalLoser());
         values.put(COLUMN_ROUND,  bracket.getCurrentRound());
+
+        //Inserting Row
+        db.insert(TABLE_BRACKETS, null, values);
+        db.close();
+    }
+
+    //Getting a bracket
+    public Bracket getBracket(String name) {
+        String [] columns = {
+                COLUMN_BRACKET_NAME, COLUMN_PLAYER_1, COLUMN_PLAYER_2,
+                COLUMN_PLAYER_3, COLUMN_PLAYER_4, COLUMN_PLAYER_5,
+                COLUMN_PLAYER_6, COLUMN_PLAYER_7, COLUMN_PLAYER_8,
+                COLUMN_R1WINNER_1, COLUMN_R1WINNER_2, COLUMN_R1WINNER_3,
+                COLUMN_R1WINNER_4, COLUMN_R1LOSER_1, COLUMN_R1LOSER_2,
+                COLUMN_R1LOSER_3, COLUMN_R1LOSER_4, COLUMN_R2WINNER_1,
+                COLUMN_R2WINNER_2, COLUMN_R2LOSER_1, COLUMN_R2LOSER_2,
+                COLUMN_R3WINNER, COLUMN_R3LOSER, COLUMN_ROUND
+        };
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = COLUMN_BRACKET_NAME + " =?";
+        String[] selectionArgs = {name};
+        Cursor cursor = db.query(TABLE_BRACKETS, columns, selectQuery, selectionArgs, null, null, null);
+        cursor.moveToFirst();
+        db.close();
+        Bracket bracket = new Bracket();
+        bracket.setBracketName(cursor.getString(0));
+        bracket.setPlayer1(cursor.getString(1));
+        bracket.setPlayer2(cursor.getString(2));
+        bracket.setPlayer3(cursor.getString(3));
+        bracket.setPlayer4(cursor.getString(4));
+        bracket.setPlayer5(cursor.getString(5));
+        bracket.setPlayer6(cursor.getString(6));
+        bracket.setPlayer7(cursor.getString(7));
+        bracket.setPlayer8(cursor.getString(8));
+        bracket.setR1winner1(cursor.getString(9));
+        bracket.setR1winner2(cursor.getString(10));
+        bracket.setR1winner3(cursor.getString(11));
+        bracket.setR1winner4(cursor.getString(12));
+        bracket.setR1loser1(cursor.getString(13));
+        bracket.setR1loser2(cursor.getString(14));
+        bracket.setR1loser3(cursor.getString(15));
+        bracket.setR1loser4(cursor.getString(16));
+        bracket.setR2winner1(cursor.getString(17));
+        bracket.setR2winner2(cursor.getString(18));
+        bracket.setR2loser1(cursor.getString(19));
+        bracket.setR2loser2(cursor.getString(20));
+        bracket.setFinalWinner(cursor.getString(21));
+        bracket.setFinalLoser(cursor.getString(22));
+        cursor.close();
+
+        return bracket;
     }
 }
