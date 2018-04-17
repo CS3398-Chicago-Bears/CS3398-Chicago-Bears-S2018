@@ -2,7 +2,6 @@ package com.cs3398.sportsapp.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import android.content.Intent;
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(databaseHelper.checkUser(name.getText().toString(), password.getText().toString())){
             Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-            intent.putExtra("user", name.getText().toString());
+            intent.putExtra("userName", name.getText().toString());
             startActivity(intent);
         }
         else{

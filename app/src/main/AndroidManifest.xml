@@ -12,6 +12,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -40,6 +41,8 @@
         <activity android:name=".View.SecondRoundActivity" />
         <activity android:name=".View.ThirdRoundActivity" />
         <activity android:name=".View.WinnerActivity" />
+        <activity android:name=".View.CurrentBracketsActivity" />
+        <activity android:name=".View.CompletedBracketsActivity" />
         <activity android:name=".View.CreateAccountActivity" />
 
         <!--
@@ -57,7 +60,11 @@
         <activity
             android:name=".View.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".View.FriendsListActivity"></activity>
+        <activity android:name=".View.FriendsListActivity" />
+        <activity
+            android:name=".View.SearchUsernameActivity"
+            android:label="@string/title_activity_search_username"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -9,4 +9,5 @@
     <string name="add_names">Please enter player\'s name. Only one name per line.</string>
     <string name="error_valid_name_password">Wrong User Name or Passowrd</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_search_username">SearchUsernameActivity</string>
 </resources>

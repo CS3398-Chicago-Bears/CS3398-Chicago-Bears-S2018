@@ -7,7 +7,7 @@ public class User {
     private String userName;
     private String password;
     private ArrayList<String> sportsPreference = new ArrayList<String>();
-    private int skillLevel;
+    private String skillLevel;
     private int wins;
     private int losses;
 
@@ -16,8 +16,7 @@ public class User {
     private double longitude;
 
     //Change from String to 'Bracket' type
-    private ArrayList<Bracket> currentBrackets;
-    private ArrayList<Bracket> completedBrackets;
+    private ArrayList<String> brackets;
 
     public int getuID() {
         return uID;
@@ -38,7 +37,7 @@ public class User {
         return sports.toString();
     }
 
-    public int getSkillLevel() {
+    public String getSkillLevel() {
         return skillLevel;
     }
 
@@ -58,8 +57,8 @@ public class User {
         return wins;
     }
 
-    public ArrayList<Bracket> getBracket() {
-        return currentBrackets;
+    public ArrayList<String> getBracket() {
+        return brackets;
     }
 
     public void setuID(int uID) {
@@ -70,7 +69,7 @@ public class User {
         this.sportsPreference.add(sportsPreference);
     }
 
-    public void setSkillLevel(int skillLevel) {
+    public void setSkillLevel(String skillLevel) {
         this.skillLevel = skillLevel;
     }
 
@@ -82,8 +81,8 @@ public class User {
         this.longitude = longitude;
     }
 
-    public void setBracket(ArrayList<Bracket> bracket) {
-        currentBrackets = bracket;
+    public void setBracket(ArrayList<String> bracket) {
+        brackets = bracket;
     }
 
     public void setWins(int wins) {
