@@ -43,6 +43,195 @@ public class Bracket implements Serializable{
         r2loser1 = round2loser1;
         r2loser2 = round2loser2;
     }
+
+    public String getPlayer1() {
+        return player1;
+    }
+
+    public String getPlayer2() {
+        return player2;
+    }
+
+    public String getPlayer3() {
+        return player3;
+    }
+
+    public String getPlayer4() {
+        return player4;
+    }
+
+    public String getPlayer5() {
+        return player5;
+    }
+
+    public String getPlayer6() {
+        return player6;
+    }
+
+    public String getPlayer7() {
+        return player7;
+    }
+
+    public String getPlayer8() {
+        return player8;
+    }
+
+    public String getR1loser1() {
+        return r1loser1;
+    }
+
+    public String getR1loser2() {
+        return r1loser2;
+    }
+
+    public String getR1loser3() {
+        return r1loser3;
+    }
+
+    public String getR1loser4() {
+        return r1loser4;
+    }
+
+    public String getR1winner1() {
+        return r1winner1;
+    }
+
+    public String getR1winner2() {
+        return r1winner2;
+    }
+
+    public String getR1winner3() {
+        return r1winner3;
+    }
+
+    public String getR1winner4() {
+        return r1winner4;
+    }
+
+    public String getR2winner1() {
+        return r2winner1;
+    }
+
+    public String getR2winner2() {
+        return r2winner2;
+    }
+
+    public String getR2loser1() {
+        return r2loser1;
+    }
+
+    public String getR2loser2() {
+        return r2loser2;
+    }
+
+    public String getFinalWinner() {
+        return finalWinner;
+    }
+
+    public String getFinalLoser() {
+        return finalLoser;
+    }
+
+    public int getCurrentRound() {
+        return currentRound;
+    }
+
+    public void setBracketName(String bracketName) {
+        this.bracketName = bracketName;
+    }
+
+    public void setPlayer1(String player1) {
+        this.player1 = player1;
+    }
+
+    public void setPlayer2(String player2) {
+        this.player2 = player2;
+    }
+
+    public void setPlayer3(String player3) {
+        this.player3 = player3;
+    }
+
+    public void setPlayer4(String player4) {
+        this.player4 = player4;
+    }
+
+    public void setPlayer5(String player5) {
+        this.player5 = player5;
+    }
+
+    public void setPlayer6(String player6) {
+        this.player6 = player6;
+    }
+
+    public void setPlayer7(String player7) {
+        this.player7 = player7;
+    }
+
+    public void setPlayer8(String player8) {
+        this.player8 = player8;
+    }
+
+    public void setR1loser1(String r1loser1) {
+        this.r1loser1 = r1loser1;
+    }
+
+    public void setR1loser2(String r1loser2) {
+        this.r1loser2 = r1loser2;
+    }
+
+    public void setR1loser3(String r1loser3) {
+        this.r1loser3 = r1loser3;
+    }
+
+    public void setR1loser4(String r1loser4) {
+        this.r1loser4 = r1loser4;
+    }
+
+    public void setR1winner1(String r1winner1) {
+        this.r1winner1 = r1winner1;
+    }
+
+    public void setR1winner2(String r1winner2) {
+        this.r1winner2 = r1winner2;
+    }
+
+    public void setR1winner3(String r1winner3) {
+        this.r1winner3 = r1winner3;
+    }
+
+    public void setR1winner4(String r1winner4) {
+        this.r1winner4 = r1winner4;
+    }
+
+    public void setR2winner1(String r2winner1) {
+        this.r2winner1 = r2winner1;
+    }
+
+    public void setR2winner2(String r2winner2) {
+        this.r2winner2 = r2winner2;
+    }
+
+    public void setR2loser1(String r2loser1) {
+        this.r2loser1 = r2loser1;
+    }
+
+    public void setR2loser2(String r2loser2) {
+        this.r2loser2 = r2loser2;
+    }
+
+    public void setFinalWinner(String finalWinner) {
+        this.finalWinner = finalWinner;
+    }
+
+    public void setFinalLoser(String finalLoser) {
+        this.finalLoser = finalLoser;
+    }
+
+    public void setCurrentRound(int currentRound) {
+        this.currentRound = currentRound;
+    }
+
     public void addPlayers(String name, String user1, String user2, String user3, String user4,
                            String user5, String user6, String user7, String user8) {
         BracketName = name;
