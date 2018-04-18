@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class CurrentBracketsActivity extends AppCompatActivity {
     private Button backCurrent, continueCurrent;
     private String bracketName;
-    private ArrayList <String> empty = new ArrayList();
     private DBHandlerBracket databaseHelper;
     private Bracket bracket;
 
@@ -28,7 +27,7 @@ public class CurrentBracketsActivity extends AppCompatActivity {
 
         databaseHelper = new DBHandlerBracket(CurrentBracketsActivity.this);
         bracket = new Bracket();
-        empty.add("");
+
         final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("bracketList");
 
         ArrayList<String> bList = new ArrayList<String>();
