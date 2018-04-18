@@ -23,10 +23,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
-
-
-
         search = (Button)findViewById(R.id.search);
         bracket = (Button)findViewById(R.id.bracket);
         profile = (Button)findViewById(R.id.profile);
@@ -40,35 +36,34 @@ public class HomeActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(HomeActivity.this,SearchActivity.class);
-                intent.putExtra("userName", userName);
-                startActivity(intent);
-
+            Intent intent = new Intent(HomeActivity.this,SearchActivity.class);
+            intent.putExtra("userName", userName);
+            startActivity(intent);
             }
         });
 
         bracket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (getIntent().getExtras() != null) {
-                    ArrayList<String> bracketList = new ArrayList<String>();
+            if (getIntent().getExtras() != null) {
+                ArrayList<String> currentBracketList = new ArrayList<String>();
+                ArrayList<String> completedBracketList = new ArrayList<String>();
 
-                    Intent intent = new Intent(HomeActivity.this,BracketActivity.class);
-                    intent.putExtra("userName", userName);
-                    intent.putExtra("bracketList", bracketList);
-                    startActivity(intent);
-                }
-
+                Intent intent = new Intent(HomeActivity.this,BracketActivity.class);
+                intent.putExtra("userName", userName);
+                intent.putExtra("currentBracketList", currentBracketList);
+                intent.putExtra("completedBracketList", completedBracketList);
+                startActivity(intent);
+            }
             }
         });
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,ProfileActivity.class);
-                intent.putExtra("userName", userName);
-                startActivity(intent);
+            Intent intent = new Intent(HomeActivity.this,ProfileActivity.class);
+            intent.putExtra("userName", userName);
+            startActivity(intent);
 
             }
         });
@@ -76,9 +71,9 @@ public class HomeActivity extends AppCompatActivity {
         friends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,FriendsListActivity.class);
-                intent.putExtra("userName", userName);
-                startActivity(intent);
+            Intent intent = new Intent(HomeActivity.this,FriendsListActivity.class);
+            intent.putExtra("userName", userName);
+            startActivity(intent);
 
             }
         });

@@ -14,7 +14,6 @@ import com.cs3398.sportsapp.R;
 
 import java.util.ArrayList;
 
-
 public class SavedFirstRoundActivity extends AppCompatActivity {
     private Button round1ContinueButton, round1SaveButton;
     private CheckBox user1, user2, user3, user4, user5, user6, user7, user8;
@@ -32,15 +31,12 @@ public class SavedFirstRoundActivity extends AppCompatActivity {
         bracket = new Bracket();
 
         Intent intent = getIntent();
-        //bracketName = intent.getExtras().getString("bracketName");
-        bracketName = "jeff";
+        bracketName = intent.getExtras().getString("bracketName");
+        databaseHelper = new DBHandlerBracket(SavedFirstRoundActivity.this);
         bracket = databaseHelper.getBracket(bracketName);
 
         round1ContinueButton = (Button)findViewById(R.id.saved_first_round_continue);
         round1SaveButton = (Button)findViewById(R.id.saved_first_round_save);
-
-
-
 
         user1 = (CheckBox) findViewById(R.id.saved_first_round_player_1);
         user2 = (CheckBox) findViewById(R.id.saved_first_round_player_2);
@@ -75,13 +71,17 @@ public class SavedFirstRoundActivity extends AppCompatActivity {
         round1ContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("bracketList");
+                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("currentBracketList");
+                final ArrayList<String> firstArrayList1 = getIntent().getStringArrayListExtra("completedBracketList");
 
-                ArrayList<String> bracketList = new ArrayList<String>();
-                bracketList.addAll(firstArrayList);
+                ArrayList<String> currentBracketList = new ArrayList<String>();
+                ArrayList<String> completedBracketList = new ArrayList<String>();
+                currentBracketList.addAll(firstArrayList);
+                completedBracketList.addAll(firstArrayList1);
 
-
-                Intent intent = new Intent(SavedFirstRoundActivity.this, SecondRoundActivity.class);
+                Intent intent = new Intent(SavedFirstRoundActivity.this,SecondRoundActivity.class);
+                intent.putExtra("currentBracketList", currentBracketList);
+                intent.putExtra("completedBracketList", completedBracketList);
                 intent.putExtra("bracketName", bracketName);
                 intent.putExtra("player1", name1);
                 intent.putExtra("player2", name2);
@@ -109,11 +109,20 @@ public class SavedFirstRoundActivity extends AppCompatActivity {
         round1SaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("currentBracketList");
+                final ArrayList<String> firstArrayList1 = getIntent().getStringArrayListExtra("completedBracketList");
+                int addIndex = 0;
 
-                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("bracketList");
+                ArrayList<String> currentBracketList = new ArrayList<String>();
+                ArrayList<String> completedBracketList = new ArrayList<String>();
+                currentBracketList.addAll(firstArrayList);
+                completedBracketList.addAll(firstArrayList1);
 
-                ArrayList<String> bracketList = new ArrayList<String>();
-                bracketList.addAll(firstArrayList);
+                for(String str : currentBracketList) {
+                    if(str.equals(bracketName)) { addIndex = 1; }
+                    break;
+                }
+                if(addIndex != 1) { currentBracketList.add(bracketName); }
 
                 bracket.setBracketName(bracketName);
                 bracket.setPlayer1(name1);
@@ -142,6 +151,9 @@ public class SavedFirstRoundActivity extends AppCompatActivity {
                 databaseHelper.addBracket(bracket);
 
                 Intent intent = new Intent(SavedFirstRoundActivity.this, BracketActivity.class);
+                intent.putExtra("bracketName", bracketName);
+                intent.putExtra("currentBracketList", currentBracketList);
+                intent.putExtra("completedBracketList", completedBracketList);
                 startActivity(intent);
             }
         });

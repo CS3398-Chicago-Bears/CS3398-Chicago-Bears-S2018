@@ -10,6 +10,8 @@ import com.cs3398.sportsapp.Model.Bracket;
 import com.cs3398.sportsapp.Model.DBHandlerBracket;
 import com.cs3398.sportsapp.R;
 
+import java.util.ArrayList;
+
 public class WinnerActivity extends AppCompatActivity {
     private Button winnerButton;
     private TextView winnerFinal;
@@ -63,6 +65,17 @@ public class WinnerActivity extends AppCompatActivity {
         winnerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("currentBracketList");
+                final ArrayList<String> firstArrayList1 = getIntent().getStringArrayListExtra("completedBracketList");
+
+                ArrayList<String> currentBracketList = new ArrayList<String>();
+                ArrayList<String> completedBracketList = new ArrayList<String>();
+                currentBracketList.addAll(firstArrayList);
+                completedBracketList.addAll(firstArrayList1);
+
+                currentBracketList.remove(bracketName);
+                completedBracketList.add(bracketName);
+
                 bracket.setBracketName(bracketName);
                 bracket.setPlayer1(player1);
                 bracket.setPlayer2(player2);
@@ -84,12 +97,15 @@ public class WinnerActivity extends AppCompatActivity {
                 bracket.setR2winner2(r2winner2);
                 bracket.setR2loser1(r2loser1);
                 bracket.setR2loser2(r2loser2);
-                bracket.setFinalWinner("");
-                bracket.setFinalLoser("");
+                bracket.setFinalWinner(r3winner);
+                bracket.setFinalLoser(r3loser);
                 bracket.setCurrentRound(currentRound);
                 databaseHelper.updateBracket(bracket);
 
                 Intent intent = new Intent(WinnerActivity.this, BracketActivity.class);
+                intent.putExtra("bracketName", bracketName);
+                intent.putStringArrayListExtra("currentBracketList", currentBracketList);
+                intent.putStringArrayListExtra("completedBracketList", completedBracketList);
                 startActivity(intent);
             }
         });
