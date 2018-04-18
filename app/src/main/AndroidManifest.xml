@@ -44,6 +44,7 @@
         <activity android:name=".View.CurrentBracketsActivity" />
         <activity android:name=".View.CompletedBracketsActivity" />
         <activity android:name=".View.CreateAccountActivity" />
+        <activity android:name=".View.SavedFirstRoundActivity" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

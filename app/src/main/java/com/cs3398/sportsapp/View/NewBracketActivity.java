@@ -14,6 +14,7 @@ import com.cs3398.sportsapp.Model.Bracket;
 import com.cs3398.sportsapp.R;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class NewBracketActivity extends AppCompatActivity implements Serializable{
@@ -28,7 +29,7 @@ public class NewBracketActivity extends AppCompatActivity implements Serializabl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newbracket);
-        final String userName = getIntent().getStringExtra("userName");
+
         create = (Button)findViewById(R.id.addPlayerDone);
         backNewBracket = (Button)findViewById(R.id.backNewBracket);
 
@@ -59,7 +60,15 @@ public class NewBracketActivity extends AppCompatActivity implements Serializabl
 
                 newBracket.addPlayers(bracketName, player1, player2, player3,
                         player4, player5, player6, player7, player8);
+
+
+                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("bracketList");
+
+                ArrayList<String> bracketList = new ArrayList<String>();
+                bracketList.addAll(firstArrayList);
+
                 Intent intent = new Intent(NewBracketActivity.this,FirstRoundActivity.class);
+                intent.putExtra("bracketList", bracketList);
                 intent.putExtra("bracketName", bracketName);
                 intent.putExtra("player1", player1);
                 intent.putExtra("player2", player2);
@@ -69,15 +78,20 @@ public class NewBracketActivity extends AppCompatActivity implements Serializabl
                 intent.putExtra("player6", player6);
                 intent.putExtra("player7", player7);
                 intent.putExtra("player8", player8);
-                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
         backNewBracket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("bracketList");
+
+                ArrayList<String> bracketList = new ArrayList<String>();
+                bracketList.addAll(firstArrayList);
+
+
                 Intent intent = new Intent(NewBracketActivity.this,BracketActivity.class);
-                intent.putExtra("userName", userName);
+                intent.putExtra("bracketList", bracketList);
                 startActivity(intent);
             }
         });

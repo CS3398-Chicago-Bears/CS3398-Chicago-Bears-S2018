@@ -27,10 +27,14 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_USER_LONGITUDE= "user_longitude";
 
     // Exceptions and Overrides
-    private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USERS + "("
-            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_PASSWORD + " TEXT, " + COLUMN_USER_SKILL + " INTEGER, " + COLUMN_USER_LATITUDE
-            + " DOUBLE, " + COLUMN_USER_LONGITUDE + " DOUBLE)";
+    private String CREATE_USER_TABLE = "CREATE TABLE "
+            + TABLE_USERS + "("
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_USER_NAME + " TEXT,"
+            + COLUMN_USER_PASSWORD + " TEXT, "
+            + COLUMN_USER_SKILL + " INTEGER, "
+            + COLUMN_USER_LATITUDE + " DOUBLE, "
+            + COLUMN_USER_LONGITUDE + " DOUBLE)";
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

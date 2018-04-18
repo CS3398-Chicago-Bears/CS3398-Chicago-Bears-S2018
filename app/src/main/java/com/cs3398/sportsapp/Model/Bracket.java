@@ -3,6 +3,7 @@ package com.cs3398.sportsapp.Model;
 import java.io.Serializable;
 
 public class Bracket implements Serializable{
+    private int bID;
     private String bracketName;
     private String BracketName, player1, player2, player3,
             player4, player5, player6, player7, player8;
@@ -43,6 +44,8 @@ public class Bracket implements Serializable{
         r2loser1 = round2loser1;
         r2loser2 = round2loser2;
     }
+
+    public int getbID() { return bID; }
 
     public String getPlayer1() {
         return player1;
@@ -135,6 +138,8 @@ public class Bracket implements Serializable{
     public int getCurrentRound() {
         return currentRound;
     }
+
+    public void setbID(int bID) { this.bID = bID; }
 
     public void setBracketName(String bracketName) {
         this.bracketName = bracketName;
