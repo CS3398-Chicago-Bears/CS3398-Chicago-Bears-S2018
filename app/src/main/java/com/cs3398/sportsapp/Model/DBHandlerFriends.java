@@ -70,4 +70,29 @@ public class DBHandlerFriends extends SQLiteOpenHelper {
         cursor.close();
         return status;
     }
+
+    public boolean checkUser(String userName){
+        String [] columns ={
+                KEY_ID
+        };
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selection = COLUMN_SENDER + " =?";
+        String[] selectionArgs = {userName};
+
+        Cursor cursor = db.query(TABLE_FRIENDS,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if(cursorCount > 0){
+            return true;
+        }
+        return false;
+    }
 }

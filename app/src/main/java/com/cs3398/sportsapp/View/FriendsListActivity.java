@@ -40,11 +40,9 @@ public class FriendsListActivity extends AppCompatActivity {
         listView.setVisibility(View.INVISIBLE);
         final TextView text = (TextView)findViewById(R.id.textView9);
         final String userName = getIntent().getStringExtra("userName");
-        final DBHandlerFriends fdb = new DBHandlerFriends(this);
-        final DBHandler db = new DBHandler(this);
-        final User sender = db.getUser(userName);
-        final User receiver = db.getUser("Teddy");
 
+        final DBHandler db = new DBHandler(this);
+        //fdb.addRequest(sender,receiver);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,16 +51,7 @@ public class FriendsListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fdb.addRequest(sender,receiver);
-            }
-        });
 
-//        if(fdb.getStatus(sender,receiver) == 0){
-//            text.setText("Friend Request Pending");
-//        }
           //test code
           EditText search = (EditText)findViewById(R.id.editText);
 

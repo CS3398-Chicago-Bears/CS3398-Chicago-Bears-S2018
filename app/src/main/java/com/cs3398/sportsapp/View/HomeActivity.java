@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cs3398.sportsapp.Model.DBHandler;
+import com.cs3398.sportsapp.Model.DBHandlerFriends;
 import com.cs3398.sportsapp.Model.User;
 import com.cs3398.sportsapp.R;
 
@@ -29,10 +30,11 @@ public class HomeActivity extends AppCompatActivity {
         friends = (Button)findViewById(R.id.friends);
 
         final String userName = getIntent().getStringExtra("userName");
-//        DBHandler db = new DBHandler(HomeActivity.this);
-//        TextView t = (TextView)findViewById(R.id.textView4);
-//        User u = db.getUser(userName);
-//        t.setText(u.getUserName() + " "+ u.getLatitude()+" "+String.valueOf(u.getLongitude()));
+        final DBHandlerFriends fdb = new DBHandlerFriends(this);
+        final DBHandler db = new DBHandler(this);
+        if(!fdb.checkUser(userName)){
+            fdb.addRequest(db.getUser(userName),db.getUser(userName));
+        }
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
