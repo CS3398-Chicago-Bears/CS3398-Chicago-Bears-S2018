@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <Spinner
-        android:id="@+id/completeled_bracket_spinner"
+        android:id="@+id/completed_bracket_spinner"
         android:layout_width="332dp"
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"

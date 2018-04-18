@@ -62,13 +62,17 @@ public class NewBracketActivity extends AppCompatActivity implements Serializabl
                         player4, player5, player6, player7, player8);
 
 
-                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("bracketList");
+                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("currentBracketList");
+                final ArrayList<String> firstArrayList1 = getIntent().getStringArrayListExtra("completedBracketList");
 
-                ArrayList<String> bracketList = new ArrayList<String>();
-                bracketList.addAll(firstArrayList);
+                ArrayList<String> currentBracketList = new ArrayList<String>();
+                currentBracketList.addAll(firstArrayList);
+                ArrayList<String> completedBracketList = new ArrayList<String>();
+                completedBracketList.addAll(firstArrayList1);
 
                 Intent intent = new Intent(NewBracketActivity.this,FirstRoundActivity.class);
-                intent.putExtra("bracketList", bracketList);
+                intent.putExtra("currentBracketList", currentBracketList);
+                intent.putExtra("completedBracketList", completedBracketList);
                 intent.putExtra("bracketName", bracketName);
                 intent.putExtra("player1", player1);
                 intent.putExtra("player2", player2);
@@ -84,14 +88,18 @@ public class NewBracketActivity extends AppCompatActivity implements Serializabl
         backNewBracket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("bracketList");
+                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("currentBracketList");
+                final ArrayList<String> firstArrayList1 = getIntent().getStringArrayListExtra("completedBracketList");
 
-                ArrayList<String> bracketList = new ArrayList<String>();
-                bracketList.addAll(firstArrayList);
-
+                ArrayList<String> currentBracketList = new ArrayList<String>();
+                currentBracketList.addAll(firstArrayList);
+                ArrayList<String> completedBracketList = new ArrayList<String>();
+                completedBracketList.addAll(firstArrayList1);
 
                 Intent intent = new Intent(NewBracketActivity.this,BracketActivity.class);
-                intent.putExtra("bracketList", bracketList);
+                intent.putExtra("bracketName", bracketName);
+                intent.putExtra("currentBracketList", currentBracketList);
+                intent.putExtra("completedBracketList", completedBracketList);
                 startActivity(intent);
             }
         });
