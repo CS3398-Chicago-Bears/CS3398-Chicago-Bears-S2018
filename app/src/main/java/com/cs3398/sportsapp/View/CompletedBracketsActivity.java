@@ -60,7 +60,7 @@ public class CompletedBracketsActivity extends AppCompatActivity {
                 currentBracketList.addAll(firstArrayList);
                 completedBracketList.addAll(firstArrayList1);
 
-            Intent intent = new Intent(CompletedBracketsActivity.this, BracketActivity.class);
+            Intent intent = new Intent(CompletedBracketsActivity.this, SummaryActivity.class);
             intent.putExtra("currentBracketList", currentBracketList);
             intent.putExtra("completedBracketList", completedBracketList);
             intent.putExtra("bracketName", bracketName);

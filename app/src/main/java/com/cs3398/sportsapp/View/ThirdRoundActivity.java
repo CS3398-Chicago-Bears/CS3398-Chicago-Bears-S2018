@@ -153,7 +153,7 @@ public class ThirdRoundActivity extends AppCompatActivity {
                 bracket.setFinalWinner("");
                 bracket.setFinalLoser("");
                 bracket.setCurrentRound(currentRound);
-                databaseHelper.updateBracket(bracket);
+                databaseHelper.addBracket(bracket);
 
                 Intent intent = new Intent(ThirdRoundActivity.this,BracketActivity.class);
                 intent.putExtra("bracketName", bracketName);

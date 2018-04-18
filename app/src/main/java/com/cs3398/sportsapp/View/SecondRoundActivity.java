@@ -150,8 +150,7 @@ public class SecondRoundActivity extends AppCompatActivity {
                 bracket.setFinalWinner("");
                 bracket.setFinalLoser("");
                 bracket.setCurrentRound(currentRound);
-                databaseHelper.updateBracket(bracket);
-
+                databaseHelper.addBracket(bracket);
 
 
                 Intent intent = new Intent(SecondRoundActivity.this,BracketActivity.class);
