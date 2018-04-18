@@ -46,8 +46,14 @@ public class CreateAccountActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         }else {
             final Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            lat = location.getLatitude();
-            longt = location.getLongitude();
+            if (location == null) {
+                lat = 0.0;
+                longt = 0.0;
+            }
+            else {
+                lat = location.getLatitude();
+                longt = location.getLongitude();
+            }
         }
 //create a list of items for the spinner.
         String[] items = new String[]{"Beginner", "Intermediate", "Pro"};
