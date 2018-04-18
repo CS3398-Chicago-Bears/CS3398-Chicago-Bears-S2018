@@ -3,6 +3,7 @@ package com.cs3398.sportsapp.View;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import com.cs3398.sportsapp.Model.DBHandler;
 import com.cs3398.sportsapp.Model.User;
 import com.cs3398.sportsapp.R;
 
+import java.util.ArrayList;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -34,29 +36,34 @@ public class HomeActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,SearchActivity.class);
-                intent.putExtra("userName", userName);
-                startActivity(intent);
-
+            Intent intent = new Intent(HomeActivity.this,SearchActivity.class);
+            intent.putExtra("userName", userName);
+            startActivity(intent);
             }
         });
 
         bracket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    Intent intent = new Intent(HomeActivity.this,BracketActivity.class);
-                    intent.putExtra("userName", userName);
-                    startActivity(intent);
+            if (getIntent().getExtras() != null) {
+                ArrayList<String> currentBracketList = new ArrayList<String>();
+                ArrayList<String> completedBracketList = new ArrayList<String>();
 
+                Intent intent = new Intent(HomeActivity.this,BracketActivity.class);
+                intent.putExtra("userName", userName);
+                intent.putExtra("currentBracketList", currentBracketList);
+                intent.putExtra("completedBracketList", completedBracketList);
+                startActivity(intent);
+            }
             }
         });
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,ProfileActivity.class);
-                intent.putExtra("userName", userName);
-                startActivity(intent);
+            Intent intent = new Intent(HomeActivity.this,ProfileActivity.class);
+            intent.putExtra("userName", userName);
+            startActivity(intent);
 
             }
         });
@@ -64,9 +71,9 @@ public class HomeActivity extends AppCompatActivity {
         friends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,FriendsListActivity.class);
-                intent.putExtra("userName", userName);
-                startActivity(intent);
+            Intent intent = new Intent(HomeActivity.this,FriendsListActivity.class);
+            intent.putExtra("userName", userName);
+            startActivity(intent);
 
             }
         });

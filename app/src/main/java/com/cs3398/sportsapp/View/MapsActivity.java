@@ -110,7 +110,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(miguel).title("Miguel"));
         mMap.addMarker(new MarkerOptions().position(mason).title("Mason"));
         mMap.addMarker(new MarkerOptions().position(james).title("James"));
+
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapZoom, zoom));
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

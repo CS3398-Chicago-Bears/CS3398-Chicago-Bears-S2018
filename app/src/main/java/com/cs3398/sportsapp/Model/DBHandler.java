@@ -27,10 +27,14 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_USER_LONGITUDE= "user_longitude";
 
     // Exceptions and Overrides
-    private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USERS + "("
-            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_PASSWORD + " TEXT, " + COLUMN_USER_SKILL + " INTEGER, " + COLUMN_USER_LATITUDE
-            + " DOUBLE, " + COLUMN_USER_LONGITUDE + " DOUBLE)";
+    private String CREATE_USER_TABLE = "CREATE TABLE "
+            + TABLE_USERS + "("
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_USER_NAME + " TEXT,"
+            + COLUMN_USER_PASSWORD + " TEXT, "
+            + COLUMN_USER_SKILL + " INTEGER, "
+            + COLUMN_USER_LATITUDE + " DOUBLE, "
+            + COLUMN_USER_LONGITUDE + " DOUBLE)";
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -109,7 +113,7 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return false;
     }
-    
+
     // Getting one user
     public User getUser(String name) {
         String [] columns ={
@@ -131,6 +135,32 @@ public class DBHandler extends SQLiteOpenHelper {
         cursor.close();
         // return user
         return user;
+    }
+
+    public List<User> searchUsers(String name) {
+        List<User> userList = new ArrayList<User>();
+        String [] columns ={
+                KEY_ID, COLUMN_USER_NAME, COLUMN_USER_SKILL,
+                COLUMN_USER_LATITUDE, COLUMN_USER_LONGITUDE
+        };
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = COLUMN_USER_NAME + " =?";
+        String[] selectionArgs = {name};
+        Cursor cursor = db.query(TABLE_USERS,columns,selectQuery,selectionArgs,null,null,null);
+        while(cursor.moveToNext()) {
+            User user = new User();
+            user.setuID(cursor.getInt(0));
+            user.setUserName(cursor.getString(1));
+            user.setSkillLevel(cursor.getString(2));
+            user.setLatitude(cursor.getDouble(3));
+            user.setLongitude(cursor.getDouble(4));
+            userList.add(user);
+        }
+        db.close();
+
+        cursor.close();
+        // return user
+        return userList;
     }
 
     // Getting All Users
