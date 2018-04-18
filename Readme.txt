@@ -9,12 +9,14 @@ The current status of our project:
     Database implemented - user profiles are connected to the database.
     Maps activity created.
     Google maps API key obtained.
-    Figured out most of the issues with Android Studio. 
+    Figured out most of the issues with Android Studio.
+    Profile page implemented
+    App Icon and splash screen created
+    Log in and Homepages redesigned
    
    
 Future developments:
 
-  - Profile page for users
   - Implement matchmaking system
   - Locate local competitors
   

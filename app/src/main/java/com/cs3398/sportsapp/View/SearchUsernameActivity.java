@@ -13,6 +13,8 @@ import com.cs3398.sportsapp.Model.DBHandler;
 import com.cs3398.sportsapp.Model.User;
 import com.cs3398.sportsapp.R;
 
+import java.util.List;
+
 public class SearchUsernameActivity extends AppCompatActivity {
     private String query = "";
     private DBHandler db;
@@ -32,9 +34,12 @@ public class SearchUsernameActivity extends AppCompatActivity {
         }
 
         db = new DBHandler(SearchUsernameActivity.this);
-        User u = db.getUser("t");
-
-        userList.setText(u.getUserName());
+        List<User> u = db.searchUsers("t");
+        StringBuilder allUsers = new StringBuilder();
+        for (User user : u) {
+            allUsers.append(user.getUserName());
+        }
+        userList.setText(allUsers.toString());
 
     }
 
