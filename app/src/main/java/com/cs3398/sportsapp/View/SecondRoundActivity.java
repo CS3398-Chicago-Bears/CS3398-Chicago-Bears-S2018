@@ -9,26 +9,32 @@ import android.widget.CheckBox;
 
 import com.cs3398.sportsapp.Controller.BracketController;
 import com.cs3398.sportsapp.Model.Bracket;
+import com.cs3398.sportsapp.Model.DBHandlerBracket;
 import com.cs3398.sportsapp.R;
+
+import java.util.ArrayList;
 
 public class SecondRoundActivity extends AppCompatActivity {
     private Button round2ContinueButton, round2SaveButton;
-    CheckBox user1, user2, user3, user4;
-    String bracketName, player1, player2, player3, player4, player5,
+    private CheckBox user1, user2, user3, user4;
+    private String bracketName, player1, player2, player3, player4, player5,
             player6, player7, player8;
-    String r1winner1, r1winner2, r1winner3, r1winner4;
-    String r1loser1, r1loser2, r1loser3, r1loser4;
-    String r2winner1, r2winner2;
-    String r2loser1, r2loser2;
+    private String r1winner1, r1winner2, r1winner3, r1winner4;
+    private String r1loser1, r1loser2, r1loser3, r1loser4;
+    private String r2winner1, r2winner2;
+    private String r2loser1, r2loser2;
+    private DBHandlerBracket databaseHelper;
+    private Bracket bracket;
+    private int currentRound = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_round_second_bracket);
         Intent intent = getIntent();
+
         round2ContinueButton = (Button)findViewById(R.id.second_round_continue);
         round2SaveButton = (Button)findViewById(R.id.second_round_save);
-        final String userName = getIntent().getStringExtra("userName");
 
         bracketName = intent.getExtras().getString("bracketName");
         player1 = intent.getExtras().getString("player1");
@@ -63,8 +69,13 @@ public class SecondRoundActivity extends AppCompatActivity {
         round2ContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("bracketList");
+
+                ArrayList<String> bracketList = new ArrayList<String>();
+                bracketList.addAll(firstArrayList);
 
                 Intent intent = new Intent(SecondRoundActivity.this,ThirdRoundActivity.class);
+                intent.putExtra("bracketList", bracketList);
                 intent.putExtra("bracketName", bracketName);
                 intent.putExtra("player1", player1);
                 intent.putExtra("player2", player2);
@@ -86,17 +97,52 @@ public class SecondRoundActivity extends AppCompatActivity {
                 intent.putExtra("r2winner2", r2winner2);
                 intent.putExtra("r2loser1", r2loser1);
                 intent.putExtra("r2loser2", r2loser2);
-                intent.putExtra("userName", userName);
 
                 startActivity(intent);
             }
         });
 
+        bracket = new Bracket();
+        databaseHelper = new DBHandlerBracket(SecondRoundActivity.this);
         round2SaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("bracketList");
+
+                ArrayList<String> bracketList = new ArrayList<String>();
+                bracketList.addAll(firstArrayList);
+
+                bracket.setBracketName(bracketName);
+                bracket.setPlayer1(player1);
+                bracket.setPlayer2(player2);
+                bracket.setPlayer3(player3);
+                bracket.setPlayer4(player4);
+                bracket.setPlayer5(player5);
+                bracket.setPlayer6(player6);
+                bracket.setPlayer7(player7);
+                bracket.setPlayer8(player8);
+                bracket.setR1winner1(r1winner1);
+                bracket.setR1winner2(r1winner2);
+                bracket.setR1winner3(r1winner3);
+                bracket.setR1winner4(r1winner4);
+                bracket.setR1loser1(r1loser1);
+                bracket.setR1loser2(r1loser2);
+                bracket.setR1loser3(r1loser3);
+                bracket.setR1loser4(r1loser4);
+                bracket.setR2winner1("");
+                bracket.setR2winner2("");
+                bracket.setR2loser1("");
+                bracket.setR2loser2("");
+                bracket.setFinalWinner("");
+                bracket.setFinalLoser("");
+                bracket.setCurrentRound(currentRound);
+                databaseHelper.updateBracket(bracket);
+
+                bracketList.add(bracketName);
+
+
                 Intent intent = new Intent(SecondRoundActivity.this,BracketActivity.class);
-                intent.putExtra("userName", userName);
+                intent.putExtra("bracketList", bracketList);
                 startActivity(intent);
             }
         });

@@ -15,7 +15,6 @@ public class CompletedBracketsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completed_brackets);
-        final String userName = getIntent().getStringExtra("userName");
 
         backCompleted= (Button)findViewById(R.id.completed_bracket_back);
 
@@ -23,7 +22,6 @@ public class CompletedBracketsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CompletedBracketsActivity.this, BracketActivity.class);
-                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });

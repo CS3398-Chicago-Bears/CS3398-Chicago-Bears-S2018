@@ -3,6 +3,7 @@ package com.cs3398.sportsapp.View;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import com.cs3398.sportsapp.Model.DBHandler;
 import com.cs3398.sportsapp.Model.User;
 import com.cs3398.sportsapp.R;
 
+import java.util.ArrayList;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -20,6 +22,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
+
+
 
         search = (Button)findViewById(R.id.search);
         bracket = (Button)findViewById(R.id.bracket);
@@ -34,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(HomeActivity.this,SearchActivity.class);
                 intent.putExtra("userName", userName);
                 startActivity(intent);
@@ -44,9 +51,14 @@ public class HomeActivity extends AppCompatActivity {
         bracket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (getIntent().getExtras() != null) {
+                    ArrayList<String> bracketList = new ArrayList<String>();
+
                     Intent intent = new Intent(HomeActivity.this,BracketActivity.class);
                     intent.putExtra("userName", userName);
+                    intent.putExtra("bracketList", bracketList);
                     startActivity(intent);
+                }
 
             }
         });

@@ -15,44 +15,50 @@ import com.cs3398.sportsapp.R;
 import java.util.ArrayList;
 
 
-public class FirstRoundActivity extends AppCompatActivity {
+public class SavedFirstRoundActivity extends AppCompatActivity {
     private Button round1ContinueButton, round1SaveButton;
     private CheckBox user1, user2, user3, user4, user5, user6, user7, user8;
     private String bracketName, name1, name2, name3, name4, name5, name6, name7, name8;
     private String winner1, winner2, winner3, winner4;
     private String loser1, loser2, loser3, loser4;
-    private int currentRound = 1;
+    private int currentRound;
     private DBHandlerBracket databaseHelper;
     private Bracket bracket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_round_first_bracket);
-        Intent intent = getIntent();
-
-        round1ContinueButton = (Button)findViewById(R.id.first_round_continue);
-        round1SaveButton = (Button)findViewById(R.id.first_round_save);
-
+        setContentView(R.layout.activity_saved_round_1);
         bracket = new Bracket();
-        bracketName = intent.getExtras().getString("bracketName");
-        name1 = intent.getExtras().getString("player1");
-        name2 = intent.getExtras().getString("player2");
-        name3 = intent.getExtras().getString("player3");
-        name4 = intent.getExtras().getString("player4");
-        name5 = intent.getExtras().getString("player5");
-        name6 = intent.getExtras().getString("player6");
-        name7 = intent.getExtras().getString("player7");
-        name8 = intent.getExtras().getString("player8");
 
-        user1 = (CheckBox) findViewById(R.id.first_round_player_1);
-        user2 = (CheckBox) findViewById(R.id.first_round_player_2);
-        user3 = (CheckBox) findViewById(R.id.first_round_player_3);
-        user4 = (CheckBox) findViewById(R.id.first_round_player_4);
-        user5 = (CheckBox) findViewById(R.id.first_round_player_5);
-        user6 = (CheckBox) findViewById(R.id.first_round_player_6);
-        user7 = (CheckBox) findViewById(R.id.first_round_player_7);
-        user8 = (CheckBox) findViewById(R.id.first_round_player_8);
+        Intent intent = getIntent();
+        //bracketName = intent.getExtras().getString("bracketName");
+        bracketName = "jeff";
+        bracket = databaseHelper.getBracket(bracketName);
+
+        round1ContinueButton = (Button)findViewById(R.id.saved_first_round_continue);
+        round1SaveButton = (Button)findViewById(R.id.saved_first_round_save);
+
+
+
+
+        user1 = (CheckBox) findViewById(R.id.saved_first_round_player_1);
+        user2 = (CheckBox) findViewById(R.id.saved_first_round_player_2);
+        user3 = (CheckBox) findViewById(R.id.saved_first_round_player_3);
+        user4 = (CheckBox) findViewById(R.id.saved_first_round_player_4);
+        user5 = (CheckBox) findViewById(R.id.saved_first_round_player_5);
+        user6 = (CheckBox) findViewById(R.id.saved_first_round_player_6);
+        user7 = (CheckBox) findViewById(R.id.saved_first_round_player_7);
+        user8 = (CheckBox) findViewById(R.id.saved_first_round_player_8);
+
+        name1 = bracket.getPlayer1();
+        name2 = bracket.getPlayer2();
+        name3 = bracket.getPlayer3();
+        name4 = bracket.getPlayer4();
+        name5 = bracket.getPlayer5();
+        name6 = bracket.getPlayer6();
+        name7 = bracket.getPlayer7();
+        name8 = bracket.getPlayer8();
 
         //user1.setTextColor(Color.RED);
         user1.setText(name1);
@@ -74,8 +80,8 @@ public class FirstRoundActivity extends AppCompatActivity {
                 ArrayList<String> bracketList = new ArrayList<String>();
                 bracketList.addAll(firstArrayList);
 
-                Intent intent = new Intent(FirstRoundActivity.this, SecondRoundActivity.class);
-                intent.putExtra("bracketList", bracketList);
+
+                Intent intent = new Intent(SavedFirstRoundActivity.this, SecondRoundActivity.class);
                 intent.putExtra("bracketName", bracketName);
                 intent.putExtra("player1", name1);
                 intent.putExtra("player2", name2);
@@ -93,22 +99,23 @@ public class FirstRoundActivity extends AppCompatActivity {
                 intent.putExtra("r1loser2", loser2);
                 intent.putExtra("r1loser3", loser3);
                 intent.putExtra("r1loser4", loser4);
+
                 startActivity(intent);
             }
         });
 
-        databaseHelper = new DBHandlerBracket(FirstRoundActivity.this);
+
+        databaseHelper = new DBHandlerBracket(SavedFirstRoundActivity.this);
         round1SaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 final ArrayList<String> firstArrayList = getIntent().getStringArrayListExtra("bracketList");
 
                 ArrayList<String> bracketList = new ArrayList<String>();
                 bracketList.addAll(firstArrayList);
 
-
-
-                bracket.setBracketName("jeff");
+                bracket.setBracketName(bracketName);
                 bracket.setPlayer1(name1);
                 bracket.setPlayer2(name2);
                 bracket.setPlayer3(name3);
@@ -133,11 +140,8 @@ public class FirstRoundActivity extends AppCompatActivity {
                 bracket.setFinalLoser("");
                 bracket.setCurrentRound(currentRound);
                 databaseHelper.addBracket(bracket);
-                bracketList.add(bracketName);
 
-                Intent intent = new Intent(FirstRoundActivity.this, BracketActivity.class);
-                intent.putExtra("bracketName", bracketName);
-                intent.putExtra("bracketList", bracketList);
+                Intent intent = new Intent(SavedFirstRoundActivity.this, BracketActivity.class);
                 startActivity(intent);
             }
         });

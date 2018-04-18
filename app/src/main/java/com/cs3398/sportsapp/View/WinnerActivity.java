@@ -5,22 +5,24 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
-
-import com.cs3398.sportsapp.Controller.BracketController;
+import com.cs3398.sportsapp.Model.Bracket;
+import com.cs3398.sportsapp.Model.DBHandlerBracket;
 import com.cs3398.sportsapp.R;
 
 public class WinnerActivity extends AppCompatActivity {
     private Button winnerButton;
-    TextView winnerFinal;
-    String bracketName, player1, player2, player3, player4, player5,
+    private TextView winnerFinal;
+    private String bracketName, player1, player2, player3, player4, player5,
             player6, player7, player8;
-    String r1winner1, r1winner2, r1winner3, r1winner4;
-    String r1loser1, r1loser2, r1loser3, r1loser4;
-    String r2winner1, r2winner2;
-    String r2loser1, r2loser2;
-    String r3winner, r3loser;
+    private String r1winner1, r1winner2, r1winner3, r1winner4;
+    private String r1loser1, r1loser2, r1loser3, r1loser4;
+    private String r2winner1, r2winner2;
+    private String r2loser1, r2loser2;
+    private String r3winner, r3loser;
+    private int currentRound = 4;
+    private DBHandlerBracket databaseHelper;
+    private Bracket bracket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,6 @@ public class WinnerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_winner_bracket);
         Intent intent = getIntent();
         winnerButton = (Button) findViewById(R.id.winner_button);
-        final String userName = getIntent().getStringExtra("userName");
 
         bracketName = intent.getExtras().getString("bracketName");
         player1 = intent.getExtras().getString("player1");
@@ -57,13 +58,38 @@ public class WinnerActivity extends AppCompatActivity {
         winnerFinal = (TextView) findViewById(R.id.winner_bracket);
 
         winnerFinal.setText(r3winner);
-
+        bracket = new Bracket();
+        databaseHelper = new DBHandlerBracket(WinnerActivity.this);
         winnerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                bracket.setBracketName(bracketName);
+                bracket.setPlayer1(player1);
+                bracket.setPlayer2(player2);
+                bracket.setPlayer3(player3);
+                bracket.setPlayer4(player4);
+                bracket.setPlayer5(player5);
+                bracket.setPlayer6(player6);
+                bracket.setPlayer7(player7);
+                bracket.setPlayer8(player8);
+                bracket.setR1winner1(r1winner1);
+                bracket.setR1winner2(r1winner2);
+                bracket.setR1winner3(r1winner3);
+                bracket.setR1winner4(r1winner4);
+                bracket.setR1loser1(r1loser1);
+                bracket.setR1loser2(r1loser2);
+                bracket.setR1loser3(r1loser3);
+                bracket.setR1loser4(r1loser4);
+                bracket.setR2winner1(r2winner1);
+                bracket.setR2winner2(r2winner2);
+                bracket.setR2loser1(r2loser1);
+                bracket.setR2loser2(r2loser2);
+                bracket.setFinalWinner("");
+                bracket.setFinalLoser("");
+                bracket.setCurrentRound(currentRound);
+                databaseHelper.updateBracket(bracket);
 
                 Intent intent = new Intent(WinnerActivity.this, BracketActivity.class);
-                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
