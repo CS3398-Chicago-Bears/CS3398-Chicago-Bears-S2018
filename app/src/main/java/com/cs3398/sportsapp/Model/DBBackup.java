@@ -19,7 +19,7 @@ public class DBBackup extends SQLiteOpenHelper{
     // Database Name
     private static final String DATABASE_NAME = "backup database storage";
     // Contacts table name
-    private static final String TABLE_USERS = "users";
+    private static final String TABLE_USERS = "stored users";
     // Users Table Columns names
     private static final String KEY_ID = "id";
     private static final String COLUMN_USER_NAME = "name";
@@ -56,10 +56,12 @@ public class DBBackup extends SQLiteOpenHelper{
     // Getting All Users
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<User>();
+
         // Select All Query
         String selectQuery = "SELECT * FROM" + TABLE_USERS;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
@@ -71,6 +73,7 @@ public class DBBackup extends SQLiteOpenHelper{
                 userList.add(user);
             } while (cursor.moveToNext());
         }
+
         // return contact list
         cursor.close();
         return userList;
@@ -85,6 +88,7 @@ public class DBBackup extends SQLiteOpenHelper{
         values.put(COLUMN_USER_SKILL, user.getSkillLevel());
         values.put(COLUMN_USER_LATITUDE, user.getLatitude());
         values.put(COLUMN_USER_LONGITUDE, user.getLongitude());
+
         // Inserting Row
         db.insert(TABLE_USERS, null, values);
         db.close(); // Closing database connection
