@@ -12,16 +12,16 @@ public class WriteFile {
 	// Write object data into a file
 	public static void serializeDataOut(User userData)throws IOException{
 		// initializing output streams to null value
-		FileOutputStream fout = null;
+		FileOutputStream fout;
 		ObjectOutputStream oos = null;
 
 		try {
 			String fileName = "Database.txt";
 			fout = new FileOutputStream(fileName);
 			oos = new ObjectOutputStream(fout);
+
 			oos.writeObject(userData);
 			System.out.println("Done");
-
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		  }
@@ -32,14 +32,16 @@ public class WriteFile {
 	// Read object data from a file
 	public static User serializeDataIn() throws IOException, ClassNotFoundException {
 		// initializing input streams to null value
-		FileInputStream fin = null;
-		ObjectInputStream ois = null;
+		FileInputStream fin;
+		ObjectInputStream ois;
 
 		String fileName = "Database.txt";
 		fin = new FileInputStream(fileName);
 		ois = new ObjectInputStream(fin);
+
 		User user = (User) ois.readObject();
 		System.out.println("Done");
+
 		ois.close();
 		return user;
 	}
