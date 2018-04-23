@@ -10,6 +10,7 @@ import java.util.List;
 
 //  backup database to store reserve users. Only uses the add, delete, and get all users function
 //  expected to be used with write file operations as backup storage for user info.
+//  backup database uses different version number and name to distinguish between main db.
 
 public class DBBackup extends SQLiteOpenHelper{
     // Initializing the database
