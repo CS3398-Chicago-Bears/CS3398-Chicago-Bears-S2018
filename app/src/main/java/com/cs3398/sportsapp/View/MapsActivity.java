@@ -30,7 +30,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onInfoWindowClick(Marker marker) {
         Intent intent = new Intent(MapsActivity.this,ProfileActivity.class);
-        intent.putExtra("userName", marker.getTitle());
+        intent.putExtra("userName", getIntent().getStringExtra("userName"));
+        intent.putExtra("flag", "Friend");
+        intent.putExtra("FriendFlag", "False");
+        intent.putExtra("friendName", marker.getTitle());
+        intent.putExtra("mapFlag", "True");
         System.out.println(marker.getTitle());
         startActivity(intent);
     }
@@ -112,20 +116,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapZoom, zoom));
         }
 
-        LatLng taylor = new LatLng(29.893385, -97.916649);
-        LatLng miguel = new LatLng(29.893872, -97.933557);
-        LatLng mason = new LatLng(29.876854, -97.936828);
+//        LatLng taylor = new LatLng(29.893385, -97.916649);
+//        LatLng miguel = new LatLng(29.893872, -97.933557);
+        LatLng mason = new LatLng(29.883596, -97.940352);
         LatLng james = new LatLng(29.878745, -97.920107);
-        LatLng sydney = new LatLng(29.8884, -97.9384);
+//        LatLng sydney = new LatLng(29.8884, -97.9384);
         LatLng jeffrey = new LatLng(u.getLatitude(), u.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Dr.Lehr's favorite Chicago bears"));
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Dr.Lehr's favorite Chicago bears"));
         mMap.addMarker(new MarkerOptions().position(jeffrey).title(userName).snippet(u.getSkillLevel() + " - football"));
-
-
-        mMap.addMarker(new MarkerOptions().position(taylor).title("Taylor"));
-        mMap.addMarker(new MarkerOptions().position(miguel).title("Miguel"));
-        mMap.addMarker(new MarkerOptions().position(mason).title("Mason"));
-        mMap.addMarker(new MarkerOptions().position(james).title("James"));
+//
+//
+//        mMap.addMarker(new MarkerOptions().position(taylor).title("Taylor"));
+//        mMap.addMarker(new MarkerOptions().position(miguel).title("Miguel"));
+        u = db.getUser("Mason");
+        mMap.addMarker(new MarkerOptions().position(mason).title("Mason").snippet(u.getSkillLevel() + " - basketball"));
+        u = db.getUser("James");
+        mMap.addMarker(new MarkerOptions().position(james).title("James").snippet(u.getSkillLevel() + " - baseball"));
 
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapZoom, zoom));
 
