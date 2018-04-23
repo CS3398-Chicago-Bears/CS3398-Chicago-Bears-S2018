@@ -112,6 +112,18 @@ public class ProfileActivity extends AppCompatActivity {
 
         msg.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
+                Intent intent;
+                if(getIntent().getStringExtra("flag").equals("Friend")){
+                    intent = new Intent(ProfileActivity.this,MessagesActivity.class);
+                    intent.putExtra("userName", getIntent().getStringExtra("userName"));
+                    startActivity(intent);
+                }
+                else{
+                    intent = new Intent (ProfileActivity.this, MessagesActivity.class);
+                    intent.putExtra("userName", userName);
+                    startActivity(intent);
+                }
+                /*
                 AlertDialog.Builder msgBox = new AlertDialog.Builder(ProfileActivity.this);
                 msgBox.setTitle("Message: " + name.getText());
                 msgBox.setMessage("Enter Message");
@@ -134,12 +146,14 @@ public class ProfileActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
+                                Intent i = new Intent(ProfileActivity.this,MessagesActivity.class);
                                 //WILL ADD MESSAGING LATER
+                                startActivity(i);
                             }
                         });
 
                 msgBox.show();
-
+                */
             }
         });
 
