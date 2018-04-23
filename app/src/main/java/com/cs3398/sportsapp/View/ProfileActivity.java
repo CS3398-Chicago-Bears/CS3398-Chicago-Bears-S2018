@@ -39,8 +39,10 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         DBHandler db = new DBHandler(ProfileActivity.this);
         final String userName;
+        final Button addButton = findViewById(R.id.add);
         if(getIntent().getStringExtra("flag").equals("Friend")){
             userName = getIntent().getStringExtra("friendName");
+            addButton.setVisibility(View.VISIBLE);
         }
         else{
             userName = getIntent().getStringExtra("userName");

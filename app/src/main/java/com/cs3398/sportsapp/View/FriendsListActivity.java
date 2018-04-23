@@ -25,7 +25,7 @@ import com.cs3398.sportsapp.R;
 import java.util.ArrayList;
 
 public class FriendsListActivity extends AppCompatActivity {
-    Button back, add;
+    Button back, cancel;
     ListView listView;
     ArrayList<User> userList = new ArrayList<>();
     UserAdapter adapter;
@@ -35,12 +35,12 @@ public class FriendsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
         back = (Button)findViewById(R.id.back);
-        add = (Button)findViewById(R.id.button4);
+        cancel = (Button)findViewById(R.id.cancel);
         listView= (ListView)findViewById(R.id.list);
         listView.setVisibility(View.INVISIBLE);
         final TextView text = (TextView)findViewById(R.id.textView9);
         final String userName = getIntent().getStringExtra("userName");
-
+        final EditText search = (EditText)findViewById(R.id.editText);
         final DBHandler db = new DBHandler(this);
         //fdb.addRequest(sender,receiver);
         back.setOnClickListener(new View.OnClickListener() {
@@ -52,8 +52,15 @@ public class FriendsListActivity extends AppCompatActivity {
             }
         });
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                search.setText("");
+                listView.setVisibility(View.INVISIBLE);
+            }
+        });
+
           //test code
-          EditText search = (EditText)findViewById(R.id.editText);
 
           listView.setTextFilterEnabled(true);
           listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -77,6 +84,7 @@ public class FriendsListActivity extends AppCompatActivity {
               @Override
               public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                   adapter.getFilter().filter(charSequence.toString());
+                  listView.setVisibility(View.VISIBLE);
               }
 
               @Override
