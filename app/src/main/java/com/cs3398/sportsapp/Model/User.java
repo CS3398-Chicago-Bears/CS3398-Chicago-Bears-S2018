@@ -6,14 +6,14 @@ public class User {
     private int uID;
     private String userName;
     private String password;
-    private ArrayList<String> sportsPreference;
-    private int skillLevel;
+    private ArrayList<String> sportsPreference = new ArrayList<String>();
+    private String skillLevel;
     private int wins;
     private int losses;
 
     // In place of zip code
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
 
     //Change from String to 'Bracket' type
     private ArrayList<String> brackets;
@@ -26,22 +26,26 @@ public class User {
     public String getPassword(){return password;}
 
     public String getSportsPreference() {
-        for (String s : sportsPreference) {
-            // Will change as needed. Only returns first string for now.
-            return s;
+        StringBuilder sports = new StringBuilder();
+        for(int i = 0; i < sportsPreference.size(); i++) {
+            sports.append(sportsPreference.get(i));
+            if (i != sportsPreference.size() - 1) {
+                sports.append("\n");
+            }
         }
-        return "placeholder";
+
+        return sports.toString();
     }
 
-    public int getSkillLevel() {
+    public String getSkillLevel() {
         return skillLevel;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
@@ -65,15 +69,15 @@ public class User {
         this.sportsPreference.add(sportsPreference);
     }
 
-    public void setSkillLevel(int skillLevel) {
+    public void setSkillLevel(String skillLevel) {
         this.skillLevel = skillLevel;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 

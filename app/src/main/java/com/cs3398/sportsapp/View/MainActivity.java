@@ -2,7 +2,6 @@ package com.cs3398.sportsapp.View;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import android.content.Intent;
@@ -10,13 +9,19 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 
 import com.cs3398.sportsapp.Controller.AuthenticateLogIn;
+import com.cs3398.sportsapp.Model.Bracket;
 import com.cs3398.sportsapp.Model.DBHandler;
+import com.cs3398.sportsapp.Model.DBHandlerFriends;
 import com.cs3398.sportsapp.R;
+
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
     private EditText name, password;
     private Button login, createNewAccount;
-    private DBHandler databaseHelper;
+    public static DBHandler databaseHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +39,15 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if(authenticator.validate(name.getText().toString(),password.getText().toString())){
-//                    Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-//                    startActivity(intent);
-//                }
-                verifyFromSQLite();
+            verifyFromSQLite();
             }
         });
 
         createNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View view) {
-                Intent intent = new Intent(MainActivity.this,CreateAccountActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(MainActivity.this,CreateAccountActivity.class);
+            startActivity(intent);
             }
         });
 
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(databaseHelper.checkUser(name.getText().toString(), password.getText().toString())){
             Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+            intent.putExtra("userName", name.getText().toString());
             startActivity(intent);
         }
         else{
