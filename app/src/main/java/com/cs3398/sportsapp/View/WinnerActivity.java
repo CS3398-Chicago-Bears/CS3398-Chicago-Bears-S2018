@@ -100,7 +100,7 @@ public class WinnerActivity extends AppCompatActivity {
                 bracket.setFinalWinner(r3winner);
                 bracket.setFinalLoser(r3loser);
                 bracket.setCurrentRound(currentRound);
-                databaseHelper.updateBracket(bracket);
+                databaseHelper.addBracket(bracket);
 
                 Intent intent = new Intent(WinnerActivity.this, BracketActivity.class);
                 intent.putExtra("bracketName", bracketName);

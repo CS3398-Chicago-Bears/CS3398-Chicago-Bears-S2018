@@ -4,8 +4,7 @@ import java.io.Serializable;
 
 public class Bracket implements Serializable{
     private int bID;
-    private String bracketName;
-    private String BracketName, player1, player2, player3,
+    private String bracketName, player1, player2, player3,
             player4, player5, player6, player7, player8;
     private String r1loser1, r1loser2, r1loser3, r1loser4;
     private String r1winner1, r1winner2, r1winner3, r1winner4;
@@ -239,7 +238,7 @@ public class Bracket implements Serializable{
 
     public void addPlayers(String name, String user1, String user2, String user3, String user4,
                            String user5, String user6, String user7, String user8) {
-        BracketName = name;
+        bracketName = name;
         player1 = user1;
         player2 = user2;
         player3 = user3;
