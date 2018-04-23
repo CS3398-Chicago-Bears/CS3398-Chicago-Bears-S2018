@@ -55,7 +55,7 @@ public class DBHandlerFriends extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int getStatus(User u, User f){
+    public boolean getStatus(User u, User f){
         String [] columns ={
                 KEY_ID, COLUMN_SENDER, COLUMN_RECEIVER,
                 COLUMN_STATUS
@@ -66,8 +66,43 @@ public class DBHandlerFriends extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_FRIENDS,columns,selectQuery,selectionArgs,null,null,null);
         cursor.moveToFirst();
         db.close();
-        int status = cursor.getInt(3);
+        int count = cursor.getCount();
         cursor.close();
-        return status;
+        if(count > 0)
+            return true;
+        return false;
+    }
+
+    public boolean checkUser(String userName){
+        String [] columns ={
+                KEY_ID
+        };
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selection = COLUMN_RECEIVER + " =?";
+        String[] selectionArgs = {userName};
+
+        Cursor cursor = db.query(TABLE_FRIENDS,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        if(cursorCount > 0){
+            return true;
+        }
+        return false;
+    }
+    public int getSize(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM friends", null);
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+        return cursorCount;
     }
 }

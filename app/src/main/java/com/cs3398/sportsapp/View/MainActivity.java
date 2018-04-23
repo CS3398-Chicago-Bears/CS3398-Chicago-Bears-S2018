@@ -11,6 +11,7 @@ import android.support.v4.widget.NestedScrollView;
 import com.cs3398.sportsapp.Controller.AuthenticateLogIn;
 import com.cs3398.sportsapp.Model.Bracket;
 import com.cs3398.sportsapp.Model.DBHandler;
+import com.cs3398.sportsapp.Model.DBHandlerFriends;
 import com.cs3398.sportsapp.R;
 
 import java.util.ArrayList;

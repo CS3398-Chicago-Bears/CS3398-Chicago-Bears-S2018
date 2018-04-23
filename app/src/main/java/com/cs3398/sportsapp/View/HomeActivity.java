@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cs3398.sportsapp.Model.DBHandler;
+import com.cs3398.sportsapp.Model.DBHandlerFriends;
 import com.cs3398.sportsapp.Model.User;
 import com.cs3398.sportsapp.R;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 
 
 public class HomeActivity extends AppCompatActivity {
-    private Button search, bracket, profile, friends;
+    private Button search, bracket, profile, friends, signout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +28,14 @@ public class HomeActivity extends AppCompatActivity {
         bracket = (Button)findViewById(R.id.bracket);
         profile = (Button)findViewById(R.id.profile);
         friends = (Button)findViewById(R.id.friends);
+        signout = (Button)findViewById(R.id.buttonsignout);
 
         final String userName = getIntent().getStringExtra("userName");
-//        DBHandler db = new DBHandler(HomeActivity.this);
-//        TextView t = (TextView)findViewById(R.id.textView4);
-//        User u = db.getUser(userName);
-//        t.setText(u.getUserName() + " "+ u.getLatitude()+" "+String.valueOf(u.getLongitude()));
+        final DBHandlerFriends fdb = new DBHandlerFriends(this);
+        final DBHandler db = new DBHandler(this);
+        if(fdb.getSize() == 0){
+            fdb.addRequest(db.getUser(userName),db.getUser(userName));
+        }
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +66,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
             Intent intent = new Intent(HomeActivity.this,ProfileActivity.class);
             intent.putExtra("userName", userName);
+            intent.putExtra("flag", "notFriend");
             startActivity(intent);
 
             }
@@ -75,6 +79,14 @@ public class HomeActivity extends AppCompatActivity {
             intent.putExtra("userName", userName);
             startActivity(intent);
 
+            }
+        });
+
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
