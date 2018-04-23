@@ -66,7 +66,8 @@
         <activity
             android:name=".View.SearchUsernameActivity"
             android:label="@string/title_activity_search_username"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".View.MessagesActivity"></activity>
     </application>
 
 </manifest>

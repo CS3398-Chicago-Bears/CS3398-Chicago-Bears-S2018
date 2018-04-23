@@ -15,20 +15,22 @@ public class DBHandlerMsg extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
-    private static final String DATABASE_NAME = "user messages";
+    private static final String DATABASE_NAME = "userMessages";
     // Contacts table name
     private static final String TABLE_MESSAGES = "messages";
     // Users Table Columns names
-    private static final String COLUMN_SENDER = "from";
-    private static final String COLUMN_RECEIVER = "to";
+    private static final String COLUMN_SENDER = "fromUser";
+    private static final String COLUMN_RECEIVER = "toUser";
     private static final String COLUMN_CONTENT = "content";
+    private static final String KEY_ID = "id";
 
 
     // Exceptions and Overrides
-    private String CREATE_BRACKET_TABLE = "CREATE TABLE " + TABLE_MESSAGES + "("
+    private String CREATE_MESSAGE_TABLE = "CREATE TABLE " + TABLE_MESSAGES + "("
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_SENDER + " TEXT, "
             + COLUMN_RECEIVER + " TEXT, "
-            + COLUMN_CONTENT + " TEXT";
+            + COLUMN_CONTENT + " TEXT)";
 
     public DBHandlerMsg(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -36,7 +38,7 @@ public class DBHandlerMsg extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_BRACKET_TABLE);
+        db.execSQL(CREATE_MESSAGE_TABLE);
     }
 
     @Override
@@ -50,8 +52,8 @@ public class DBHandlerMsg extends SQLiteOpenHelper {
     public void addMsg(String from, String to, String content) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_RECEIVER, to);
         values.put(COLUMN_SENDER, from);
+        values.put(COLUMN_RECEIVER, to);
         values.put(COLUMN_CONTENT, content);
 
         //Inserting Row
@@ -65,7 +67,7 @@ public class DBHandlerMsg extends SQLiteOpenHelper {
                 COLUMN_SENDER, COLUMN_RECEIVER, COLUMN_CONTENT
         };
         SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = COLUMN_SENDER + " =?";
+        String selectQuery = COLUMN_RECEIVER + " =?";
         String[] selectionArgs = {name};
         Cursor cursor = db.query(TABLE_MESSAGES, columns, selectQuery, selectionArgs, null, null, null);
         cursor.moveToFirst();
@@ -77,5 +79,28 @@ public class DBHandlerMsg extends SQLiteOpenHelper {
         cursor.close();
 
         return m;
+    }
+
+    public List<Message> getAllMsg(String name) {
+        List<Message> msgList = new ArrayList<Message>();
+        String [] columns ={
+                COLUMN_SENDER, COLUMN_RECEIVER, COLUMN_CONTENT
+        };
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = COLUMN_RECEIVER + " =?";
+        String[] selectionArgs = {name};
+        Cursor cursor = db.query(TABLE_MESSAGES,columns,selectQuery,selectionArgs,null,null,null);
+        while(cursor.moveToNext()) {
+            Message msg = new Message();
+            msg.setSender(cursor.getString(0));
+            msg.setReceiver(cursor.getString(1));
+            msg.setContent(cursor.getString(2));
+            msgList.add(msg);
+        }
+        db.close();
+
+        cursor.close();
+        // return user
+        return msgList;
     }
 }
