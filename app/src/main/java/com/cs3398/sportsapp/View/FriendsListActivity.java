@@ -83,6 +83,7 @@ public class FriendsListActivity extends AppCompatActivity {
                   intent.putExtra("friendName",ListViewClickData.getUserName() );
                   intent.putExtra("flag", "Friend");
                   intent.putExtra("FriendFlag", "False");
+                  intent.putExtra("mapFlag", "False");
                   startActivity(intent);
               }
           });
@@ -96,6 +97,7 @@ public class FriendsListActivity extends AppCompatActivity {
                   intent.putExtra("friendName",ListViewClickData.getUserName() );
                   intent.putExtra("flag", "Friend");
                   intent.putExtra("FriendFlag", "True");
+                  intent.putExtra("mapFlag", "False");
                   startActivity(intent);
               }
           });
