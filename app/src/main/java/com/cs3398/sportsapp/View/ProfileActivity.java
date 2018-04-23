@@ -147,8 +147,13 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent;
-                if(getIntent().getStringExtra("flag").equals("Friend")){
+                if(getIntent().getStringExtra("flag").equals("Friend") && !(getIntent().getStringExtra("mapFlag").equals("True"))){
                     intent = new Intent(ProfileActivity.this,FriendsListActivity.class);
+                    intent.putExtra("userName", getIntent().getStringExtra("userName"));
+                    startActivity(intent);
+                }
+                else if(getIntent().getStringExtra("mapFlag").equals("True")){
+                    intent = new Intent(ProfileActivity.this, SearchActivity.class);
                     intent.putExtra("userName", getIntent().getStringExtra("userName"));
                     startActivity(intent);
                 }
