@@ -31,6 +31,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onInfoWindowClick(Marker marker) {
         Intent intent = new Intent(MapsActivity.this,ProfileActivity.class);
         intent.putExtra("userName", marker.getTitle());
+        intent.putExtra("flag", "False");
         System.out.println(marker.getTitle());
         startActivity(intent);
     }
@@ -112,11 +113,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapZoom, zoom));
         }
 
-        LatLng taylor = new LatLng(29.893385, -97.916649);
-        LatLng miguel = new LatLng(29.893872, -97.933557);
-        LatLng mason = new LatLng(29.876854, -97.936828);
-        LatLng james = new LatLng(29.878745, -97.920107);
-        LatLng sydney = new LatLng(29.8884, -97.9384);
+//        LatLng taylor = new LatLng(29.893385, -97.916649);
+//        LatLng miguel = new LatLng(29.893872, -97.933557);
+//        LatLng mason = new LatLng(29.876854, -97.936828);
+//        LatLng james = new LatLng(29.878745, -97.920107);
+//        LatLng sydney = new LatLng(29.8884, -97.9384);
         LatLng jeffrey = new LatLng(u.getLatitude(), u.getLongitude());
         mMap.addMarker(new MarkerOptions().position(sydney).title("Dr.Lehr's favorite Chicago bears"));
         mMap.addMarker(new MarkerOptions().position(jeffrey).title(userName).snippet(u.getSkillLevel() + " - football"));
