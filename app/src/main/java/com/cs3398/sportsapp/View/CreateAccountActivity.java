@@ -47,6 +47,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         }
             final Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (location == null) {
+
                 lat = 29.8892;
                 longt = -97.9423;
             }

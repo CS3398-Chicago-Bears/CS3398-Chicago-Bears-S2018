@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,9 +27,10 @@ import java.util.ArrayList;
 
 public class FriendsListActivity extends AppCompatActivity {
     Button back, cancel;
-    ListView listView;
+    ListView listView, friendsListView;
     ArrayList<User> userList = new ArrayList<>();
-    UserAdapter adapter;
+    UserAdapter adapter, friendAdapter;
+    TextView tv;
     Cursor cursor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,9 @@ public class FriendsListActivity extends AppCompatActivity {
         cancel = (Button)findViewById(R.id.cancel);
         listView= (ListView)findViewById(R.id.list);
         listView.setVisibility(View.INVISIBLE);
-        final TextView text = (TextView)findViewById(R.id.textView9);
+        friendsListView= (ListView)findViewById(R.id.friendsListView);
+        tv = (TextView)findViewById(R.id.TV);
+        //friendsListView.setVisibility(View.GONE);
         final String userName = getIntent().getStringExtra("userName");
         final EditText search = (EditText)findViewById(R.id.editText);
         final DBHandler db = new DBHandler(this);
@@ -55,8 +59,15 @@ public class FriendsListActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InputMethodManager inputManager = (InputMethodManager)
+                        getSystemService(FriendsListActivity.this.INPUT_METHOD_SERVICE);
+
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
                 search.setText("");
                 listView.setVisibility(View.INVISIBLE);
+                friendsListView.setVisibility(View.VISIBLE);
+                tv.setVisibility(View.VISIBLE);
             }
         });
 
@@ -71,6 +82,20 @@ public class FriendsListActivity extends AppCompatActivity {
                   intent.putExtra("userName",userName);
                   intent.putExtra("friendName",ListViewClickData.getUserName() );
                   intent.putExtra("flag", "Friend");
+                  intent.putExtra("FriendFlag", "False");
+                  startActivity(intent);
+              }
+          });
+
+          friendsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+              @Override
+              public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                  User ListViewClickData = (User) adapterView.getItemAtPosition(i);
+                  Intent intent = new Intent(FriendsListActivity.this,ProfileActivity.class);
+                  intent.putExtra("userName",userName);
+                  intent.putExtra("friendName",ListViewClickData.getUserName() );
+                  intent.putExtra("flag", "Friend");
+                  intent.putExtra("FriendFlag", "True");
                   startActivity(intent);
               }
           });
@@ -84,7 +109,9 @@ public class FriendsListActivity extends AppCompatActivity {
               @Override
               public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                   adapter.getFilter().filter(charSequence.toString());
+                  friendsListView.setVisibility(View.INVISIBLE);
                   listView.setVisibility(View.VISIBLE);
+                  tv.setVisibility(View.INVISIBLE);
               }
 
               @Override
@@ -95,7 +122,9 @@ public class FriendsListActivity extends AppCompatActivity {
           search.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
+                  friendsListView.setVisibility(View.INVISIBLE);
                   listView.setVisibility(View.VISIBLE);
+                  tv.setVisibility(View.INVISIBLE);
               }
           });
 
@@ -106,14 +135,16 @@ public class FriendsListActivity extends AppCompatActivity {
     public void DisplayDataInToListView(){
           DBHandler dbh = new DBHandler(this);
           SQLiteDatabase db = dbh.getWritableDatabase();
-
+          DBHandlerFriends fdb = new DBHandlerFriends(this);
           cursor = db.rawQuery("SELECT name FROM users",null);
           User u;
           userList = new ArrayList<User>();
           if(cursor.moveToFirst()){
               do{
                   u = dbh.getUser(cursor.getString(0));
-                  userList.add(u);
+                  if(!(u.getUserName().equals(getIntent().getStringExtra("userName")))&& !(fdb.getStatus(dbh.getUser(getIntent().getStringExtra("userName")),u))){
+                      userList.add(u);
+                  }
               }while(cursor.moveToNext());
           }
           adapter = new UserAdapter(FriendsListActivity.this,R.layout.custom_layout, userList);
@@ -121,9 +152,38 @@ public class FriendsListActivity extends AppCompatActivity {
           cursor.close();
     }
 
+    public void DisplayFriendsList(){
+        DBHandler dbh = new DBHandler(this);
+        DBHandlerFriends fdbh = new DBHandlerFriends(this);
+        SQLiteDatabase db = fdbh.getWritableDatabase();
+        //Cursor fc = db.rawQuery("SELECT receiver FROM friends", null);
+        String [] columns ={
+                "receiver"
+        };
+        String selectQuery = "sender =?";
+        String[] selectionArgs = {dbh.getUser(getIntent().getStringExtra("userName")).getUserName()};
+        Cursor fc = db.query("friends",columns,selectQuery,selectionArgs,null,null,null);
+        fc.moveToFirst();
+        db.close();
+        User friend;
+        ArrayList<User> friendList = new ArrayList<>();
+        if(fc.moveToFirst()){
+            do{
+                friend = dbh.getUser(fc.getString(0));
+                if(!(friend.getUserName().equals(getIntent().getStringExtra("userName")))){
+                    friendList.add(friend);
+                }
+            }while(fc.moveToNext());
+        }
+        friendAdapter = new UserAdapter(this,R.layout.custom_layout,friendList);
+        friendsListView.setAdapter(friendAdapter);
+        fc.close();
+    }
+
      @Override
      protected void onResume(){
         DisplayDataInToListView();
+        DisplayFriendsList();
         super.onResume();
     }
 

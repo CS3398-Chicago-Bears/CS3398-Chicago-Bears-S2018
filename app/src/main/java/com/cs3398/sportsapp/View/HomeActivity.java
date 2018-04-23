@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 
 public class HomeActivity extends AppCompatActivity {
-    private Button search, bracket, profile, friends;
+    private Button search, bracket, profile, friends, signout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +28,12 @@ public class HomeActivity extends AppCompatActivity {
         bracket = (Button)findViewById(R.id.bracket);
         profile = (Button)findViewById(R.id.profile);
         friends = (Button)findViewById(R.id.friends);
+        signout = (Button)findViewById(R.id.buttonsignout);
 
         final String userName = getIntent().getStringExtra("userName");
         final DBHandlerFriends fdb = new DBHandlerFriends(this);
         final DBHandler db = new DBHandler(this);
-        if(!fdb.checkUser(userName)){
+        if(fdb.getSize() == 0){
             fdb.addRequest(db.getUser(userName),db.getUser(userName));
         }
         search.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +79,14 @@ public class HomeActivity extends AppCompatActivity {
             intent.putExtra("userName", userName);
             startActivity(intent);
 
+            }
+        });
+
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 

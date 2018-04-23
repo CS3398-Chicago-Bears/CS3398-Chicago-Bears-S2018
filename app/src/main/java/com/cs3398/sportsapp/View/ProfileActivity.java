@@ -1,6 +1,7 @@
 package com.cs3398.sportsapp.View;
 
 import com.cs3398.sportsapp.Model.DBHandler;
+import com.cs3398.sportsapp.Model.DBHandlerFriends;
 import com.cs3398.sportsapp.Model.User;
 
 import android.content.DialogInterface;
@@ -37,12 +38,17 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        DBHandler db = new DBHandler(ProfileActivity.this);
+        final DBHandler db = new DBHandler(ProfileActivity.this);
+        final DBHandlerFriends fdb = new DBHandlerFriends(ProfileActivity.this);
         final String userName;
         final Button addButton = findViewById(R.id.add);
-        if(getIntent().getStringExtra("flag").equals("Friend")){
+        if(getIntent().getStringExtra("flag").equals("Friend") && getIntent().getStringExtra("FriendFlag").equals("False")){
             userName = getIntent().getStringExtra("friendName");
             addButton.setVisibility(View.VISIBLE);
+        }
+        else if(getIntent().getStringExtra("flag").equals("Friend") && getIntent().getStringExtra("FriendFlag").equals("True")){
+            userName = getIntent().getStringExtra("friendName");
+            addButton.setVisibility(View.INVISIBLE);
         }
         else{
             userName = getIntent().getStringExtra("userName");
@@ -62,6 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
         final SearchView search = findViewById(R.id.searchView);
         Button submit = findViewById(R.id.button3);
         Button back = (Button)findViewById(R.id.back);
+
         //User user = DBHandler.getUser();
 
         name.setText(u1.getUserName());
@@ -150,6 +157,13 @@ public class ProfileActivity extends AppCompatActivity {
                     intent.putExtra("userName", userName);
                     startActivity(intent);
                 }
+            }
+        });
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fdb.addRequest(db.getUser(getIntent().getStringExtra("userName")),db.getUser(userName));
             }
         });
     }

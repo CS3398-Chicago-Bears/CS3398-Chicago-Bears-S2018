@@ -2,6 +2,7 @@ package com.cs3398.sportsapp.View;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,17 +17,28 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, OnInfoWindowClickListener {
 
     private GoogleMap mMap;
     public static DBHandler databaseHelper;
 
+
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Intent intent = new Intent(MapsActivity.this,ProfileActivity.class);
+        intent.putExtra("userName", marker.getTitle());
+        System.out.println(marker.getTitle());
+        startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -50,7 +62,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final String userName = getIntent().getStringExtra("userName");
         final String location = getIntent().getStringExtra("location");
         System.out.println(location);
+        googleMap.setOnInfoWindowClickListener(this);
         int zip;
+
         LatLng mapZoom;
         try {
             zip = Integer.parseInt(location);
@@ -106,12 +120,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng jeffrey = new LatLng(u.getLatitude(), u.getLongitude());
         mMap.addMarker(new MarkerOptions().position(sydney).title("Dr.Lehr's favorite Chicago bears"));
         mMap.addMarker(new MarkerOptions().position(jeffrey).title(userName).snippet(u.getSkillLevel() + " - football"));
+
+
         mMap.addMarker(new MarkerOptions().position(taylor).title("Taylor"));
         mMap.addMarker(new MarkerOptions().position(miguel).title("Miguel"));
         mMap.addMarker(new MarkerOptions().position(mason).title("Mason"));
         mMap.addMarker(new MarkerOptions().position(james).title("James"));
 
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mapZoom, zoom));
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,4 +139,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
 }
