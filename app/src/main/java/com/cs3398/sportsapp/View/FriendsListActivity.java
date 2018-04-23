@@ -106,14 +106,15 @@ public class FriendsListActivity extends AppCompatActivity {
     public void DisplayDataInToListView(){
           DBHandler dbh = new DBHandler(this);
           SQLiteDatabase db = dbh.getWritableDatabase();
-
           cursor = db.rawQuery("SELECT name FROM users",null);
           User u;
           userList = new ArrayList<User>();
           if(cursor.moveToFirst()){
               do{
                   u = dbh.getUser(cursor.getString(0));
-                  userList.add(u);
+                  if(!(u.getUserName().equals(getIntent().getStringExtra("userName")))){
+                      userList.add(u);
+                  }
               }while(cursor.moveToNext());
           }
           adapter = new UserAdapter(FriendsListActivity.this,R.layout.custom_layout, userList);
