@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         final String userName = getIntent().getStringExtra("userName");
         final DBHandlerFriends fdb = new DBHandlerFriends(this);
         final DBHandler db = new DBHandler(this);
-        if(!fdb.checkUser(userName)){
+        if(fdb.getSize() == 0){
             fdb.addRequest(db.getUser(userName),db.getUser(userName));
         }
         search.setOnClickListener(new View.OnClickListener() {

@@ -42,9 +42,13 @@ public class ProfileActivity extends AppCompatActivity {
         final DBHandlerFriends fdb = new DBHandlerFriends(ProfileActivity.this);
         final String userName;
         final Button addButton = findViewById(R.id.add);
-        if(getIntent().getStringExtra("flag").equals("Friend")){
+        if(getIntent().getStringExtra("flag").equals("Friend") && getIntent().getStringExtra("FriendFlag").equals("False")){
             userName = getIntent().getStringExtra("friendName");
             addButton.setVisibility(View.VISIBLE);
+        }
+        else if(getIntent().getStringExtra("flag").equals("Friend") && getIntent().getStringExtra("FriendFlag").equals("True")){
+            userName = getIntent().getStringExtra("friendName");
+            addButton.setVisibility(View.INVISIBLE);
         }
         else{
             userName = getIntent().getStringExtra("userName");
