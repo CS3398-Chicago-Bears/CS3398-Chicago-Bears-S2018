@@ -1,5 +1,8 @@
 package com.cs3398.sportsapp;
 
+import com.cs3398.sportsapp.Controller.AuthenticateLogIn;
+import com.cs3398.sportsapp.Model.User;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,7 +14,38 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+    public void user_isCorrect() throws Exception {
+        User user = new User();
+
+        String name = "jeff";
+        user.setUserName(name);
+        assertEquals(name, user.getUserName());
+    }
+
+    @Test
+    public void user_isIncorrect() throws Exception {
+        User user = new User();
+        String name = "Jeff";
+        String name2 = "Miguel";
+        user.setUserName(name);
+        assertNotEquals(name2, user.getUserName());
+    }
+
+    @Test
+    public void validate_user_isTrue() throws Exception {
+        AuthenticateLogIn auth = new AuthenticateLogIn();
+        String name = "Admin";
+        String pass = "Admin";
+
+        assertTrue(auth.validate(name, pass));
+    }
+
+    @Test
+    public void validate_user_isFalse() throws Exception {
+        AuthenticateLogIn auth = new AuthenticateLogIn();
+        String name = "Admin";
+        String pass = "Not Admin";
+
+        assertFalse(auth.validate(name, pass));
     }
 }

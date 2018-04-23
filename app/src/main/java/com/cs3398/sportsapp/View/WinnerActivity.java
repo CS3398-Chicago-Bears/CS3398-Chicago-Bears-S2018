@@ -32,7 +32,7 @@ public class WinnerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_winner_bracket);
         Intent intent = getIntent();
         winnerButton = (Button) findViewById(R.id.winner_button);
-
+        final String userName = getIntent().getStringExtra("userName");
         bracketName = intent.getExtras().getString("bracketName");
         player1 = intent.getExtras().getString("player1");
         player2 = intent.getExtras().getString("player2");
@@ -100,12 +100,13 @@ public class WinnerActivity extends AppCompatActivity {
                 bracket.setFinalWinner(r3winner);
                 bracket.setFinalLoser(r3loser);
                 bracket.setCurrentRound(currentRound);
-                databaseHelper.updateBracket(bracket);
+                databaseHelper.addBracket(bracket);
 
                 Intent intent = new Intent(WinnerActivity.this, BracketActivity.class);
                 intent.putExtra("bracketName", bracketName);
                 intent.putStringArrayListExtra("currentBracketList", currentBracketList);
                 intent.putStringArrayListExtra("completedBracketList", completedBracketList);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });

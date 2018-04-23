@@ -2,6 +2,8 @@ package com.cs3398.sportsapp.View;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -26,25 +28,32 @@ public class SearchActivity extends AppCompatActivity {
         search = (Button)findViewById(R.id.searchSearch);
         backSearch = (Button)findViewById(R.id.backSearch);
         searchLocation = (EditText)findViewById(R.id.enterLocationText);
-        map = (Button)findViewById(R.id.mapButton);
+        //map = (Button)findViewById(R.id.mapButton);
 
         final String userName = getIntent().getStringExtra("userName");
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SearchActivity.this,MapsActivity.class);
-                intent.putExtra("userName", userName);
-                startActivity(intent);
-            }
-        });
+//        map.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(SearchActivity.this,MapsActivity.class);
+//                intent.putExtra("userName", userName);
+//                startActivity(intent);
+//            }
+//        });
 
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchActivity.this,SearchActivity.class);
-                intent.putExtra("userName", userName);
-                startActivity(intent);
+
+//                Intent intent = new Intent(SearchActivity.this,SearchActivity.class);
+//                startActivity(intent);
+
+                    Intent intent = new Intent(SearchActivity.this, MapsActivity.class);
+                    intent.putExtra("userName", userName);
+                    intent.putExtra("location", searchLocation.getText().toString());
+                    startActivity(intent);
+
+
             }
         });
 

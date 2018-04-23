@@ -30,7 +30,7 @@ public class FirstRoundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_round_first_bracket);
         Intent intent = getIntent();
-
+        final String userName = getIntent().getStringExtra("userName");
         round1ContinueButton = (Button)findViewById(R.id.first_round_continue);
         round1SaveButton = (Button)findViewById(R.id.first_round_save);
 
@@ -97,6 +97,7 @@ public class FirstRoundActivity extends AppCompatActivity {
                 intent.putExtra("r1loser2", loser2);
                 intent.putExtra("r1loser3", loser3);
                 intent.putExtra("r1loser4", loser4);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
@@ -151,6 +152,7 @@ public class FirstRoundActivity extends AppCompatActivity {
                 intent.putExtra("bracketName", bracketName);
                 intent.putExtra("currentBracketList", currentBracketList);
                 intent.putExtra("completedBracketList", completedBracketList);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
