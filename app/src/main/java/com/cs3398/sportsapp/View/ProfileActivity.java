@@ -113,8 +113,13 @@ public class ProfileActivity extends AppCompatActivity {
         msg.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 Intent intent;
-                if(getIntent().getStringExtra("flag").equals("Friend")){
+                if(getIntent().getStringExtra("flag").equals("Friend") && !(getIntent().getStringExtra("mapFlag").equals("True"))){
                     intent = new Intent(ProfileActivity.this,MessagesActivity.class);
+                    intent.putExtra("userName", getIntent().getStringExtra("userName"));
+                    startActivity(intent);
+                }
+                else if(getIntent().getStringExtra("mapFlag").equals("True")){
+                    intent = new Intent(ProfileActivity.this, MessagesActivity.class);
                     intent.putExtra("userName", getIntent().getStringExtra("userName"));
                     startActivity(intent);
                 }
