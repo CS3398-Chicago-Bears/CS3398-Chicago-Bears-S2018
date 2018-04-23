@@ -60,7 +60,11 @@ public class FriendsListActivity extends AppCompatActivity {
               @Override
               public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                   User ListViewClickData = (User) adapterView.getItemAtPosition(i);
-                  Toast.makeText(FriendsListActivity.this,ListViewClickData.getUserName(),Toast.LENGTH_SHORT).show();
+                  Intent intent = new Intent(FriendsListActivity.this,ProfileActivity.class);
+                  intent.putExtra("userName",userName);
+                  intent.putExtra("friendName",ListViewClickData.getUserName() );
+                  intent.putExtra("flag", "Friend");
+                  startActivity(intent);
               }
           });
 

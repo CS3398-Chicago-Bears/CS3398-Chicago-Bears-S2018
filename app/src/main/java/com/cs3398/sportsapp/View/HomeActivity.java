@@ -65,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
             Intent intent = new Intent(HomeActivity.this,ProfileActivity.class);
             intent.putExtra("userName", userName);
+            intent.putExtra("flag", "notFriend");
             startActivity(intent);
 
             }

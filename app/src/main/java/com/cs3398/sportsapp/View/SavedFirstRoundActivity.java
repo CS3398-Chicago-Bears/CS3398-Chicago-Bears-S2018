@@ -29,7 +29,7 @@ public class SavedFirstRoundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_round_1);
         bracket = new Bracket();
-
+        final String userName = getIntent().getStringExtra("userName");
         Intent intent = getIntent();
         bracketName = intent.getExtras().getString("bracketName");
         databaseHelper = new DBHandlerBracket(SavedFirstRoundActivity.this);
@@ -99,6 +99,7 @@ public class SavedFirstRoundActivity extends AppCompatActivity {
                 intent.putExtra("r1loser2", loser2);
                 intent.putExtra("r1loser3", loser3);
                 intent.putExtra("r1loser4", loser4);
+                intent.putExtra("userName", userName);
 
                 startActivity(intent);
             }
@@ -154,6 +155,7 @@ public class SavedFirstRoundActivity extends AppCompatActivity {
                 intent.putExtra("bracketName", bracketName);
                 intent.putExtra("currentBracketList", currentBracketList);
                 intent.putExtra("completedBracketList", completedBracketList);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });

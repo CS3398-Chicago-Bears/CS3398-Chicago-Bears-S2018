@@ -48,6 +48,7 @@ public class BracketActivity extends AppCompatActivity {
                 intent.putExtra("bracketName", bracketName);
                 intent.putExtra("currentBracketList", currentBracketList);
                 intent.putExtra("completedBracketList", completedBracketList);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
@@ -68,6 +69,7 @@ public class BracketActivity extends AppCompatActivity {
                     intent.putExtra("bracketName", bracketName);
                     intent.putExtra("currentBracketList", currentBracketList);
                     intent.putExtra("completedBracketList", completedBracketList);
+                    intent.putExtra("userName", userName);
                     startActivity(intent);
                 }
                 else {
@@ -82,6 +84,7 @@ public class BracketActivity extends AppCompatActivity {
                     Intent intent = new Intent(BracketActivity.this, BracketActivity.class);
                     intent.putExtra("currentBracketList", currentBracketList);
                     intent.putExtra("completedBracketList", completedBracketList);
+                    intent.putExtra("userName", userName);
                     startActivity(intent);
                 }
             }
@@ -103,6 +106,7 @@ public class BracketActivity extends AppCompatActivity {
                     intent.putExtra("bracketName", bracketName);
                     intent.putExtra("currentBracketList", currentBracketList);
                     intent.putExtra("completedBracketList", completedBracketList);
+                    intent.putExtra("userName", userName);
                     startActivity(intent);
                 }
                 else {
@@ -118,6 +122,7 @@ public class BracketActivity extends AppCompatActivity {
                     intent.putExtra("bracketName", bracketName);
                     intent.putExtra("currentBracketList", currentBracketList);
                     intent.putExtra("completedBracketList", completedBracketList);
+                    intent.putExtra("userName", userName);
                     startActivity(intent);
                 }
             }
