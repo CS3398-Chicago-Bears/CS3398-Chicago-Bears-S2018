@@ -25,7 +25,7 @@ import com.cs3398.sportsapp.R;
 import java.util.ArrayList;
 
 public class FriendsListActivity extends AppCompatActivity {
-    Button back, add;
+    Button back, cancel;
     ListView listView;
     ArrayList<User> userList = new ArrayList<>();
     UserAdapter adapter;
@@ -35,16 +35,14 @@ public class FriendsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
         back = (Button)findViewById(R.id.back);
-        add = (Button)findViewById(R.id.button4);
+        cancel = (Button)findViewById(R.id.cancel);
         listView= (ListView)findViewById(R.id.list);
         listView.setVisibility(View.INVISIBLE);
         final TextView text = (TextView)findViewById(R.id.textView9);
         final String userName = getIntent().getStringExtra("userName");
-        final DBHandlerFriends fdb = new DBHandlerFriends(this);
+        final EditText search = (EditText)findViewById(R.id.editText);
         final DBHandler db = new DBHandler(this);
-        final User sender = db.getUser(userName);
-        final User receiver = db.getUser("Teddy");
-
+        //fdb.addRequest(sender,receiver);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,25 +51,27 @@ public class FriendsListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        add.setOnClickListener(new View.OnClickListener() {
+
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fdb.addRequest(sender,receiver);
+                search.setText("");
+                listView.setVisibility(View.INVISIBLE);
             }
         });
 
-//        if(fdb.getStatus(sender,receiver) == 0){
-//            text.setText("Friend Request Pending");
-//        }
           //test code
-          EditText search = (EditText)findViewById(R.id.editText);
 
           listView.setTextFilterEnabled(true);
           listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
               @Override
               public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                   User ListViewClickData = (User) adapterView.getItemAtPosition(i);
-                  Toast.makeText(FriendsListActivity.this,ListViewClickData.getUserName(),Toast.LENGTH_SHORT).show();
+                  Intent intent = new Intent(FriendsListActivity.this,ProfileActivity.class);
+                  intent.putExtra("userName",userName);
+                  intent.putExtra("friendName",ListViewClickData.getUserName() );
+                  intent.putExtra("flag", "Friend");
+                  startActivity(intent);
               }
           });
 
@@ -84,6 +84,7 @@ public class FriendsListActivity extends AppCompatActivity {
               @Override
               public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                   adapter.getFilter().filter(charSequence.toString());
+                  listView.setVisibility(View.VISIBLE);
               }
 
               @Override

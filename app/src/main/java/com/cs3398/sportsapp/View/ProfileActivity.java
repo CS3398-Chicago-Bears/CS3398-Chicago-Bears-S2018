@@ -38,7 +38,15 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         DBHandler db = new DBHandler(ProfileActivity.this);
-        final String userName = getIntent().getStringExtra("userName");
+        final String userName;
+        final Button addButton = findViewById(R.id.add);
+        if(getIntent().getStringExtra("flag").equals("Friend")){
+            userName = getIntent().getStringExtra("friendName");
+            addButton.setVisibility(View.VISIBLE);
+        }
+        else{
+            userName = getIntent().getStringExtra("userName");
+        }
         User u1 = db.getUser(userName);
 
 
@@ -131,9 +139,17 @@ public class ProfileActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this,HomeActivity.class);
-                intent.putExtra("userName", userName);
-                startActivity(intent);
+                Intent intent;
+                if(getIntent().getStringExtra("flag").equals("Friend")){
+                    intent = new Intent(ProfileActivity.this,FriendsListActivity.class);
+                    intent.putExtra("userName", getIntent().getStringExtra("userName"));
+                    startActivity(intent);
+                }
+                else{
+                    intent = new Intent (ProfileActivity.this, HomeActivity.class);
+                    intent.putExtra("userName", userName);
+                    startActivity(intent);
+                }
             }
         });
     }

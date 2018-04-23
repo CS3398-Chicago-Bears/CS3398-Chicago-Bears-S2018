@@ -44,17 +44,16 @@ public class CreateAccountActivity extends AppCompatActivity {
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-        }else {
+        }
             final Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (location == null) {
-                lat = 0.0;
-                longt = 0.0;
+                lat = 29.8892;
+                longt = -97.9423;
             }
             else {
                 lat = location.getLatitude();
                 longt = location.getLongitude();
             }
-        }
 //create a list of items for the spinner.
         String[] items = new String[]{"Beginner", "Intermediate", "Pro"};
 //create an adapter to describe how the items are displayed, adapters are used in several places in android.

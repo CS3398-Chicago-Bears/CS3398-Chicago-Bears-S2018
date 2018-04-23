@@ -31,6 +31,7 @@ public class BracketActivity extends AppCompatActivity {
         currentBracket = (Button)findViewById(R.id.current);
         completedBracket = (Button)findViewById(R.id.completed);
         backBracket = (Button)findViewById(R.id.backbracket);
+        final String userName = getIntent().getStringExtra("userName");
 
         newBracket.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +48,7 @@ public class BracketActivity extends AppCompatActivity {
                 intent.putExtra("bracketName", bracketName);
                 intent.putExtra("currentBracketList", currentBracketList);
                 intent.putExtra("completedBracketList", completedBracketList);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
@@ -67,6 +69,7 @@ public class BracketActivity extends AppCompatActivity {
                     intent.putExtra("bracketName", bracketName);
                     intent.putExtra("currentBracketList", currentBracketList);
                     intent.putExtra("completedBracketList", completedBracketList);
+                    intent.putExtra("userName", userName);
                     startActivity(intent);
                 }
                 else {
@@ -81,6 +84,7 @@ public class BracketActivity extends AppCompatActivity {
                     Intent intent = new Intent(BracketActivity.this, BracketActivity.class);
                     intent.putExtra("currentBracketList", currentBracketList);
                     intent.putExtra("completedBracketList", completedBracketList);
+                    intent.putExtra("userName", userName);
                     startActivity(intent);
                 }
             }
@@ -102,6 +106,7 @@ public class BracketActivity extends AppCompatActivity {
                     intent.putExtra("bracketName", bracketName);
                     intent.putExtra("currentBracketList", currentBracketList);
                     intent.putExtra("completedBracketList", completedBracketList);
+                    intent.putExtra("userName", userName);
                     startActivity(intent);
                 }
                 else {
@@ -117,6 +122,7 @@ public class BracketActivity extends AppCompatActivity {
                     intent.putExtra("bracketName", bracketName);
                     intent.putExtra("currentBracketList", currentBracketList);
                     intent.putExtra("completedBracketList", completedBracketList);
+                    intent.putExtra("userName", userName);
                     startActivity(intent);
                 }
             }
@@ -137,6 +143,7 @@ public class BracketActivity extends AppCompatActivity {
                 intent.putExtra("bracketName", bracketName);
                 intent.putExtra("currentBracketList", currentBracketList);
                 intent.putExtra("completedBracketList", completedBracketList);
+                intent.putExtra("userName", userName);
                 startActivity(intent);
             }
         });
