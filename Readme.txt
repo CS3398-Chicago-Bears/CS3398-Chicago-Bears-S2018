@@ -8,9 +8,5 @@ Current features of Pitchers and Catchers include user account creation along wi
 
 There is also a backend that includes databases for storing user information. There are existing databses that store messages, user friends, and general user information such as location and sports preferences. The databases and their functions may be found in our MODEL DIRECTORY. This directory also includes the essential base classes for the users and brackets. 
    
-   
-Future developments:
 
-  - Implement matchmaking system
-  - Locate local competitors
   
