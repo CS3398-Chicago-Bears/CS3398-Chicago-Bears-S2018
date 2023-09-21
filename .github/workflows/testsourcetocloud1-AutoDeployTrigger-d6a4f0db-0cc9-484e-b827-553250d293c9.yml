@@ -7,17 +7,15 @@ on:
     branches: 
       [ Taylor ]
     paths:
-    - '//**'
+    - '**'
     - '.github/workflows/testsourcetocloud1-AutoDeployTrigger-d6a4f0db-0cc9-484e-b827-553250d293c9.yml'
 
   # Allow manual trigger 
-  workflow_dispatch:      
-
+  workflow_dispatch:
+      
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions: 
-      id-token: write #This is required for requesting the OIDC JWT Token
 
     steps:
       - name: Checkout to the branch
@@ -26,9 +24,7 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.TESTSOURCETOCLOUD1_AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.TESTSOURCETOCLOUD1_AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.TESTSOURCETOCLOUD1_AZURE_SUBSCRIPTION_ID }}
+          creds: ${{ secrets.TESTSOURCETOCLOUD1_AZURE_CREDENTIALS }}
 
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v1
@@ -40,6 +36,7 @@ jobs:
           containerAppName: testsourcetocloud1
           resourceGroup: tmauldin-test
           imageToBuild: tmregtest.azurecr.io/testsourcetocloud1:${{ github.sha }}
-          dockerfilePath: Dockerfile
+          
 
+     
 
